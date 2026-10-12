@@ -88,6 +88,37 @@ enum AgentAccountEvent: Equatable {
     case exhausted(provider: AgentProvider, nextReset: Date?)
 }
 
+/// Where adding a login stands, from the tap on Add login to the saved login.
+enum AddLoginState: Equatable {
+    case starting(AgentProvider)
+    /// Claude Code opened this page; the code it shows is typed in here.
+    case claude(url: URL)
+    /// Codex waits for this code to be typed into this page.
+    case codex(url: URL, code: String)
+    case finishing(AgentProvider)
+    /// The text is the sign-in tool's own last line, for the person to read.
+    case failed(AgentProvider, message: String)
+    /// The provider's tool is not on this Mac.
+    case toolMissing(AgentProvider)
+
+    var provider: AgentProvider {
+        switch self {
+        case .starting(let provider), .finishing(let provider), .failed(let provider, _), .toolMissing(let provider):
+            return provider
+        case .claude: return .claude
+        case .codex: return .codex
+        }
+    }
+
+    /// False once it has ended and only says how.
+    var isUnderWay: Bool {
+        switch self {
+        case .failed, .toolMissing: return false
+        case .starting, .claude, .codex, .finishing: return true
+        }
+    }
+}
+
 /// Why the last action on the page did nothing.
 enum AgentAccountError: Equatable {
     /// The provider is nil when the login to swap to is no longer saved.

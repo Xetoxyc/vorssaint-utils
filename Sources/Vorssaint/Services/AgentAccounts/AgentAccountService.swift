@@ -59,6 +59,8 @@ final class AgentAccountService: ObservableObject {
     @Published private(set) var switching: AgentAccount.ID?
     @Published private(set) var lastSwap: SwapRecord?
     @Published private(set) var lastError: AgentAccountError?
+    /// A login being added with the provider's own sign-in; one at a time.
+    @Published private(set) var adding: AddLoginState?
     let events = PassthroughSubject<AgentAccountEvent, Never>()
 
     private static let tick: TimeInterval = 60
@@ -78,6 +80,9 @@ final class AgentAccountService: ObservableObject {
     private var paused = false
     private var session = 0
     private var timer: Timer?
+    private var loginFlow: AgentLoginFlow?
+    /// Counts the sign-ins begun, so one that was cancelled says nothing later.
+    private var addAttempt = 0
 
     // Confined to `queue`.
     private struct Engine {
@@ -108,7 +113,8 @@ final class AgentAccountService: ObservableObject {
     private var appeared = false
     private var codexApps: [URL] = []
     /// A Terminal window's PATH, asked of the login shell once and only when
-    /// Codex is in none of the usual places: that runs the shell's startup files.
+    /// a provider's tool is in none of the usual places: that runs the
+    /// shell's startup files.
     private var shellPath: String?
     private var shellPathAsked = false
 
@@ -160,6 +166,7 @@ final class AgentAccountService: ObservableObject {
         switching = nil
         lastSwap = nil
         lastError = nil
+        cancelAdd()
         queue.async { [self] in
             readerSession = -1
             engine = nil
@@ -259,7 +266,103 @@ final class AgentAccountService: ObservableObject {
         }
     }
 
+    // MARK: Adding a login (main thread)
+
+    /// Starts the provider's own sign-in for an account to add. It runs in a
+    /// private folder of its own, so the login in use stays as it is.
+    func beginAdd(_ provider: AgentProvider) {
+        guard running, adding?.isUnderWay != true else { return }
+        addAttempt += 1
+        let attempt = addAttempt
+        adding = .starting(provider)
+        queue.async { [self] in
+            let flow = readerSession >= 0 ? makeLoginFlow(provider) : nil
+            DispatchQueue.main.async { [self] in
+                guard attempt == addAttempt else { return }
+                guard let flow else {
+                    adding = .toolMissing(provider)
+                    return
+                }
+                loginFlow = flow
+                Thread.detachNewThread { [self] in run(flow, attempt: attempt) }
+            }
+        }
+    }
+
+    /// The code the browser showed after the Claude sign-in.
+    func submitCode(_ code: String) {
+        guard case .claude = adding, let loginFlow,
+              !code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        adding = .finishing(.claude)
+        loginFlow.submit(code)
+    }
+
+    /// Ends the sign-in under way, or puts away how the last one ended.
+    func cancelAdd() {
+        addAttempt += 1
+        loginFlow?.cancel()
+        loginFlow = nil
+        adding = nil
+    }
+
+    /// Runs on a thread of its own for as long as the person takes to sign in.
+    private func run(_ flow: AgentLoginFlow, attempt: Int) {
+        let provider = flow.provider
+        let outcome = flow.run(progress: { [weak self] step in
+            DispatchQueue.main.async {
+                guard let self, attempt == self.addAttempt else { return }
+                switch step {
+                case .claude(let url): self.adding = .claude(url: url)
+                case .codex(let url, let code): self.adding = .codex(url: url, code: code)
+                case .finishing: self.adding = .finishing(provider)
+                }
+            }
+        }, capture: { [self] live in
+            try queue.sync {
+                guard readerSession >= 0, let engine else { throw AgentLoginError.unreadable("the section was turned off") }
+                let account = try engine.store.capture(live)
+                polling.forget(account.id)
+                readings[account.id] = nil
+            }
+        })
+        DispatchQueue.main.async { [self] in
+            // A login kept just as the person cancelled is still a saved one.
+            if case .added = outcome { refreshUsage(force: true) }
+            guard attempt == addAttempt else { return }
+            loginFlow = nil
+            switch outcome {
+            case .added, .cancelled: adding = nil
+            case .failed(let message): adding = .failed(provider, message: message)
+            }
+        }
+    }
+
     // MARK: Reading (queue)
+
+    /// Nil when the provider's tool is not on this Mac.
+    private func makeLoginFlow(_ provider: AgentProvider) -> AgentLoginFlow? {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        guard let container = PrivateFileStore.containerURL, let executable = executable(provider, home: home) else { return nil }
+        let keychain = ClaudeKeychain()
+        return AgentLoginFlow(provider: provider, executable: executable,
+                              environment: AgentCodexServer.environment(for: executable, searchPath: shellPath),
+                              container: container.appending(path: "AgentAccounts", directoryHint: .isDirectory),
+                              secrets: keychain, services: keychain.claudeServices)
+    }
+
+    /// The provider's command-line tool, looked for along the login shell's
+    /// PATH as well when it is in none of the usual places.
+    private func executable(_ provider: AgentProvider, home: URL) -> URL? {
+        let apps = provider == .codex ? codexApps : []
+        let tool = provider == .codex ? "codex" : "claude"
+        var executable = AgentCodexServer.executable(apps: apps, home: home, searchPath: shellPath, tool: tool)
+        if executable == nil, !shellPathAsked {
+            shellPathAsked = true
+            shellPath = HomebrewEnvironment.loginShellExports(shellPath: HomebrewCommandBuilder.currentShellPath)["PATH"]
+            executable = AgentCodexServer.executable(apps: apps, home: home, searchPath: shellPath, tool: tool)
+        }
+        return executable
+    }
 
     private func startTimer() {
         let timer = Timer(timeInterval: Self.tick, repeats: true) { [weak self] _ in self?.refreshUsage(force: false) }
@@ -299,13 +402,7 @@ final class AgentAccountService: ObservableObject {
 
     /// Runs on `queue`, called by the Codex adapter.
     private func codexLimits(_ codexHome: URL?, home: URL) -> Result<AgentLimits, AgentCodexServer.Failure> {
-        var executable = AgentCodexServer.executable(apps: codexApps, home: home, searchPath: shellPath)
-        if executable == nil, !shellPathAsked {
-            shellPathAsked = true
-            shellPath = HomebrewEnvironment.loginShellExports(shellPath: HomebrewCommandBuilder.currentShellPath)["PATH"]
-            executable = AgentCodexServer.executable(apps: codexApps, home: home, searchPath: shellPath)
-        }
-        guard let executable else { return .failure(.missing) }
+        guard let executable = executable(.codex, home: home) else { return .failure(.missing) }
         return CodexLogin.limits(executable, codexHome: codexHome, searchPath: shellPath)
     }
 

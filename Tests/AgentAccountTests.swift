@@ -44,6 +44,7 @@ enum AgentAccountTests {
         claudeSwitchFailures(suite)
         codexIdentity(suite)
         codexSwitch(suite)
+        AgentAccountLoginTests.run(suite)
         AgentAccountUsageTests.run(suite)
         AgentAccountAutoSwapTests.run(suite)
     }

@@ -72,6 +72,15 @@ struct ClaudeKeychain: ClaudeSecretStore {
         }
     }
 
+    /// The names of the logins Claude Code keeps for a configuration folder
+    /// of its own. `dump-keychain` without `-d` lists what each item is
+    /// called and never a secret, so nothing here asks the person anything.
+    /// Empty when the list could not be read.
+    func claudeServices() -> Set<String> {
+        guard let result = try? run(["dump-keychain"]), result.status == 0 else { return [] }
+        return AgentLoginOutput.claudeServices(inDump: String(decoding: result.output, as: UTF8.self))
+    }
+
     /// The line `security -i` reads to store a value given as hex.
     static func addCommand(service: String, account: String, hex: String) -> String {
         "add-generic-password -U -a \(quoted(account)) -s \(quoted(service)) -X \(hex)\n"

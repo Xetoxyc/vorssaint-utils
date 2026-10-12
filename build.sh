@@ -304,6 +304,7 @@ if (( TEST )); then
         Sources/Vorssaint/Services/AgentAccounts/AgentAccountSwitcher.swift
         Sources/Vorssaint/Services/AgentAccounts/AgentAutoSwap.swift
         Sources/Vorssaint/Services/AgentAccounts/AgentAccountPolling.swift
+        Sources/Vorssaint/Services/AgentAccounts/AgentLoginFlow.swift
         # The section's strings arrive with its UI; (N) skips the file until then.
         Sources/Vorssaint/Core/NotchAccountStrings.swift(N)
         Sources/Vorssaint/Services/Notch/NotchGestureSupport.swift
