@@ -82,8 +82,11 @@ struct NotchAccountsView: View {
                         }
                     }
                 }
-                if case .unsaved(let email) = service.liveLogin[provider] {
-                    unsaved(email, provider: provider)
+                switch service.liveLogin[provider] {
+                case .unsaved(let email): unsaved(email, provider: provider)
+                case .signedOut: note(text.notSignedInNote)
+                case .unsupported: note(text.apiKeyLogin)
+                case .saved, nil: EmptyView()
                 }
                 ForEach(service.accounts.filter { $0.account.provider == provider }) { state in
                     NotchAccountRow(state: state, switching: service.switching, now: now, text: text,
@@ -117,6 +120,14 @@ struct NotchAccountsView: View {
             Spacer(minLength: 6)
             NotchPillButton(title: text.save, prominent: true) { service.saveLiveLogin(provider) }
         }
+    }
+
+    /// Why none of a provider's saved logins is the one in use.
+    private func note(_ message: String) -> some View {
+        Text(message)
+            .font(.system(size: 10.5))
+            .foregroundStyle(.secondary)
+            .lineLimit(2)
     }
 
     /// The last failure, under the provider it is about; one without a

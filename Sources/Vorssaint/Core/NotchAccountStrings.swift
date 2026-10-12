@@ -34,6 +34,7 @@ struct NotchAccountStrings {
     let nextResetFormat: String
     let signedInFormat: String
     let notSignedIn: String
+    let signInByTap: String
     let apiKeyLogin: String
     let saveThisLogin: String
     let labelPlaceholder: String
@@ -53,6 +54,8 @@ struct NotchAccountStrings {
     func exhausted(_ provider: String) -> String { String(format: exhaustedFormat, provider) }
     func nextReset(_ time: String) -> String { String(format: nextResetFormat, time) }
     func signedIn(_ email: String) -> String { String(format: signedInFormat, email) }
+    /// For the page, where a tap on a saved login signs the tool in to it.
+    var notSignedInNote: String { "\(notSignedIn)\(signInByTap)" }
     func removeConfirm(_ login: String) -> String { String(format: removeConfirmFormat, login) }
     func autoSwap(_ provider: String) -> String { String(format: autoSwapFormat, provider) }
 
@@ -144,6 +147,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Next reset %@",
         signedInFormat: "Signed in as %@",
         notSignedIn: "Not signed in",
+        signInByTap: ". Tap a login to sign in.",
         apiKeyLogin: "API key login, not supported",
         saveThisLogin: "Save this login",
         labelPlaceholder: "Label",
@@ -188,6 +192,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Наступне скидання %@",
         signedInFormat: "Виконано вхід як %@",
         notSignedIn: "Вхід не виконано",
+        signInByTap: ". Торкніться входу, щоб увійти.",
         apiKeyLogin: "Вхід за ключем API, не підтримується",
         saveThisLogin: "Зберегти цей вхід",
         labelPlaceholder: "Мітка",
@@ -232,6 +237,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Próxima renovação %@",
         signedInFormat: "Conectado como %@",
         notSignedIn: "Não conectado",
+        signInByTap: ". Toque em um login para entrar.",
         apiKeyLogin: "Login com chave de API, não compatível",
         saveThisLogin: "Salvar este login",
         labelPlaceholder: "Rótulo",
@@ -276,6 +282,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Próximo reinicio %@",
         signedInFormat: "Sesión iniciada como %@",
         notSignedIn: "Sin sesión iniciada",
+        signInByTap: ". Toca un inicio de sesión para entrar.",
         apiKeyLogin: "Inicio de sesión con clave de API, no compatible",
         saveThisLogin: "Guardar este inicio de sesión",
         labelPlaceholder: "Etiqueta",
@@ -320,6 +327,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Ďalšie obnovenie %@",
         signedInFormat: "Prihlásený ako %@",
         notSignedIn: "Neprihlásený",
+        signInByTap: ". Ťuknutím na prihlásenie sa prihlásite.",
         apiKeyLogin: "Prihlásenie kľúčom API, nepodporované",
         saveThisLogin: "Uložiť toto prihlásenie",
         labelPlaceholder: "Označenie",
@@ -364,6 +372,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Nächste Erneuerung %@",
         signedInFormat: "Angemeldet als %@",
         notSignedIn: "Nicht angemeldet",
+        signInByTap: ". Tippe auf eine Anmeldung, um dich anzumelden.",
         apiKeyLogin: "Anmeldung per API-Schlüssel, nicht unterstützt",
         saveThisLogin: "Diese Anmeldung sichern",
         labelPlaceholder: "Name",
@@ -408,6 +417,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Prochaine réinitialisation %@",
         signedInFormat: "Connecté en tant que %@",
         notSignedIn: "Non connecté",
+        signInByTap: ". Touchez une connexion pour vous connecter.",
         apiKeyLogin: "Connexion par clé API, non prise en charge",
         saveThisLogin: "Enregistrer cette connexion",
         labelPlaceholder: "Libellé",
@@ -452,6 +462,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Prossimo ripristino %@",
         signedInFormat: "Accesso effettuato come %@",
         notSignedIn: "Accesso non effettuato",
+        signInByTap: ". Tocca un accesso per accedere.",
         apiKeyLogin: "Accesso con chiave API, non supportato",
         saveThisLogin: "Salva questo accesso",
         labelPlaceholder: "Etichetta",
@@ -496,6 +507,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Следующий сброс %@",
         signedInFormat: "Выполнен вход как %@",
         notSignedIn: "Вход не выполнен",
+        signInByTap: ". Нажмите на вход, чтобы войти.",
         apiKeyLogin: "Вход по ключу API, не поддерживается",
         saveThisLogin: "Сохранить этот вход",
         labelPlaceholder: "Метка",
@@ -540,6 +552,7 @@ extension NotchAccountStrings {
         nextResetFormat: "Sonraki sıfırlama %@",
         signedInFormat: "%@ olarak giriş yapıldı",
         notSignedIn: "Giriş yapılmadı",
+        signInByTap: ". Giriş yapmak için bir oturuma dokunun.",
         apiKeyLogin: "API anahtarıyla giriş, desteklenmiyor",
         saveThisLogin: "Bu oturumu kaydet",
         labelPlaceholder: "Etiket",
@@ -584,6 +597,7 @@ extension NotchAccountStrings {
         nextResetFormat: "次のリセットは%@",
         signedInFormat: "%@としてログイン中",
         notSignedIn: "ログインしていません",
+        signInByTap: "。ログインをタップするとログインします。",
         apiKeyLogin: "APIキーでのログインは非対応です",
         saveThisLogin: "このログインを保存",
         labelPlaceholder: "ラベル",
@@ -628,6 +642,7 @@ extension NotchAccountStrings {
         nextResetFormat: "다음 재설정 %@",
         signedInFormat: "%@(으)로 로그인됨",
         notSignedIn: "로그인되지 않음",
+        signInByTap: ". 로그인을 탭하면 로그인합니다.",
         apiKeyLogin: "API 키 로그인, 지원되지 않음",
         saveThisLogin: "이 로그인 저장",
         labelPlaceholder: "레이블",
@@ -672,6 +687,7 @@ extension NotchAccountStrings {
         nextResetFormat: "下次重置 %@",
         signedInFormat: "已登录为 %@",
         notSignedIn: "未登录",
+        signInByTap: "。轻点一个登录即可登录。",
         apiKeyLogin: "API 密钥登录，不支持",
         saveThisLogin: "保存此登录",
         labelPlaceholder: "标签",
@@ -716,6 +732,7 @@ extension NotchAccountStrings {
         nextResetFormat: "下次重置 %@",
         signedInFormat: "已登入為 %@",
         notSignedIn: "未登入",
+        signInByTap: "。點一下登入項目即可登入。",
         apiKeyLogin: "API 金鑰登入，不支援",
         saveThisLogin: "儲存此登入",
         labelPlaceholder: "標籤",
@@ -760,6 +777,7 @@ extension NotchAccountStrings {
         nextResetFormat: "下次重設 %@",
         signedInFormat: "已登入為 %@",
         notSignedIn: "未登入",
+        signInByTap: "。點一下登入項目即可登入。",
         apiKeyLogin: "API 密鑰登入，不支援",
         saveThisLogin: "儲存此登入",
         labelPlaceholder: "標籤",
