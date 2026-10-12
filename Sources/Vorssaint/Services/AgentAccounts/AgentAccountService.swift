@@ -73,7 +73,8 @@ final class AgentAccountService: ObservableObject {
 
     // Main thread.
     private var running = false
-    /// Reading waits while the island is away; what was read stays.
+    /// Reading waits while the island is away, unless an automatic swap is
+    /// on; what was read stays.
     private var paused = false
     private var session = 0
     private var timer: Timer?
@@ -125,18 +126,25 @@ final class AgentAccountService: ObservableObject {
             start(session: session)
         } else if paused {
             paused = false
-            startTimer()
+            if timer == nil { startTimer() }
             refreshUsage(force: false)
         }
     }
 
     /// Stops asking while the island is away, as with the display asleep or
-    /// the Mac locked, and keeps what was read.
+    /// the Mac locked, and keeps what was read; goes on asking when an
+    /// automatic swap is on. Called again when a choice changes meanwhile.
     func pause() {
-        guard running, !paused else { return }
+        guard running else { return }
         paused = true
-        timer?.invalidate()
-        timer = nil
+        if AgentAutoSwap.runsWhileAway(Self.providers, autoSwaps: preferences.autoSwaps) {
+            guard timer == nil else { return }
+            startTimer()
+            refreshUsage(force: false)
+        } else {
+            timer?.invalidate()
+            timer = nil
+        }
     }
 
     func stop() {

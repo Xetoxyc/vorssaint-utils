@@ -151,7 +151,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Remove %@?",
         removeHint: "Only the copy Vorssaint keeps is deleted. The login itself stays signed in.",
         autoSwapFormat: "Swap %@ automatically",
-        autoSwapHint: "When the login in use nears its limit, the saved login with the most room takes over.",
+        autoSwapHint: "When the login in use nears its limit, the saved login with the most room takes over. This also happens while the display sleeps or the Mac is locked.",
         threshold: "Swap at",
         privacy: "While this section is on, Vorssaint sends each saved Claude login’s token to api.anthropic.com to read its limits and renews it at platform.claude.com when it expires. For a Codex login it starts Codex’s own tool. Nothing else leaves your Mac. Logins stay in your Keychain and in Vorssaint’s private folder, and are never part of a settings backup.",
         howTo: "To add another account, sign in to it in a terminal with claude auth login or codex login. Vorssaint notices the new login and offers to save it. Saved logins stay valid."
@@ -195,7 +195,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Вилучити %@?",
         removeHint: "Буде видалено лише копію, яку зберігає Vorssaint. Сам вхід залишиться активним.",
         autoSwapFormat: "Перемикати %@ автоматично",
-        autoSwapHint: "Коли активний вхід наближається до ліміту, його замінює збережений вхід із найбільшим запасом.",
+        autoSwapHint: "Коли активний вхід наближається до ліміту, його замінює збережений вхід із найбільшим запасом. Це відбувається і тоді, коли дисплей у режимі сну або Mac заблоковано.",
         threshold: "Перемикати при",
         privacy: "Поки цей розділ увімкнено, Vorssaint надсилає токен кожного збереженого входу Claude на api.anthropic.com, щоб прочитати його ліміти, і поновлює його на platform.claude.com, коли термін дії минає. Для входу Codex запускається власний інструмент Codex. Більше нічого не залишає ваш Mac. Входи зберігаються у Вʼязці ключів і в приватній теці Vorssaint та ніколи не потрапляють у резервну копію налаштувань.",
         howTo: "Щоб додати ще один обліковий запис, увійдіть у нього в терміналі командою claude auth login або codex login. Vorssaint помітить новий вхід і запропонує зберегти його. Збережені входи залишаються чинними."
@@ -239,7 +239,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Remover %@?",
         removeHint: "Só a cópia que o Vorssaint guarda é apagada. O login em si continua conectado.",
         autoSwapFormat: "Trocar %@ automaticamente",
-        autoSwapHint: "Quando o login em uso se aproxima do limite, o login salvo com mais folga assume.",
+        autoSwapHint: "Quando o login em uso se aproxima do limite, o login salvo com mais folga assume. Isso também acontece com a tela em repouso ou o Mac bloqueado.",
         threshold: "Trocar em",
         privacy: "Enquanto esta seção está ativada, o Vorssaint envia o token de cada login salvo do Claude para api.anthropic.com para ler os limites e o renova em platform.claude.com quando ele expira. Para um login do Codex, ele inicia a própria ferramenta do Codex. Nada mais sai do seu Mac. Os logins ficam nas suas Chaves e na pasta privada do Vorssaint e nunca entram em um backup dos ajustes.",
         howTo: "Para adicionar outra conta, entre nela em um terminal com claude auth login ou codex login. O Vorssaint percebe o novo login e oferece salvá-lo. Os logins salvos continuam válidos."
@@ -283,7 +283,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "¿Eliminar %@?",
         removeHint: "Solo se borra la copia que guarda Vorssaint. El inicio de sesión en sí sigue activo.",
         autoSwapFormat: "Cambiar %@ automáticamente",
-        autoSwapHint: "Cuando el inicio de sesión en uso se acerca a su límite, lo sustituye el guardado con más margen.",
+        autoSwapHint: "Cuando el inicio de sesión en uso se acerca a su límite, lo sustituye el guardado con más margen. También ocurre con la pantalla en reposo o el Mac bloqueado.",
         threshold: "Cambiar al",
         privacy: "Mientras esta sección está activada, Vorssaint envía el token de cada inicio de sesión de Claude guardado a api.anthropic.com para leer sus límites y lo renueva en platform.claude.com cuando caduca. Para un inicio de sesión de Codex, inicia la propia herramienta de Codex. Nada más sale de tu Mac. Los inicios de sesión se guardan en tu Llavero y en la carpeta privada de Vorssaint, y nunca forman parte de una copia de seguridad de los ajustes.",
         howTo: "Para añadir otra cuenta, inicia sesión en ella en un terminal con claude auth login o codex login. Vorssaint detecta el nuevo inicio de sesión y ofrece guardarlo. Los inicios de sesión guardados siguen siendo válidos."
@@ -327,7 +327,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Odstrániť %@?",
         removeHint: "Vymaže sa iba kópia, ktorú uchováva Vorssaint. Samotné prihlásenie zostane aktívne.",
         autoSwapFormat: "Prepínať %@ automaticky",
-        autoSwapHint: "Keď sa používané prihlásenie blíži k limitu, nahradí ho uložené prihlásenie s najväčšou rezervou.",
+        autoSwapHint: "Keď sa používané prihlásenie blíži k limitu, nahradí ho uložené prihlásenie s najväčšou rezervou. Deje sa to aj vtedy, keď je displej uspaný alebo Mac zamknutý.",
         threshold: "Prepnúť pri",
         privacy: "Kým je táto sekcia zapnutá, Vorssaint posiela token každého uloženého prihlásenia Claude na api.anthropic.com, aby načítal jeho limity, a po vypršaní ho obnovuje na platform.claude.com. Pre prihlásenie do Codexu spúšťa vlastný nástroj Codexu. Nič iné váš Mac neopúšťa. Prihlásenia zostávajú vo vašej Kľúčenke a v súkromnom priečinku Vorssaintu a nikdy nie sú súčasťou zálohy nastavení.",
         howTo: "Ak chcete pridať ďalší účet, prihláste sa doň v termináli príkazom claude auth login alebo codex login. Vorssaint si nové prihlásenie všimne a ponúkne jeho uloženie. Uložené prihlásenia zostávajú platné."
@@ -371,7 +371,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "%@ entfernen?",
         removeHint: "Nur die Kopie, die Vorssaint aufbewahrt, wird gelöscht. Die Anmeldung selbst bleibt bestehen.",
         autoSwapFormat: "%@ automatisch wechseln",
-        autoSwapHint: "Nähert sich die verwendete Anmeldung ihrem Limit, übernimmt die gesicherte Anmeldung mit dem meisten Spielraum.",
+        autoSwapHint: "Nähert sich die verwendete Anmeldung ihrem Limit, übernimmt die gesicherte Anmeldung mit dem meisten Spielraum. Das geschieht auch, während der Bildschirm im Ruhezustand oder der Mac gesperrt ist.",
         threshold: "Wechseln bei",
         privacy: "Solange dieser Bereich aktiviert ist, sendet Vorssaint das Token jeder gesicherten Claude-Anmeldung an api.anthropic.com, um ihre Limits zu lesen, und erneuert es bei Ablauf über platform.claude.com. Für eine Codex-Anmeldung startet es das Codex-eigene Werkzeug. Sonst verlässt nichts deinen Mac. Anmeldungen bleiben in deinem Schlüsselbund und im privaten Ordner von Vorssaint und sind nie Teil eines Einstellungs-Backups.",
         howTo: "Um einen weiteren Account hinzuzufügen, melde dich im Terminal mit claude auth login oder codex login an. Vorssaint bemerkt die neue Anmeldung und bietet an, sie zu sichern. Gesicherte Anmeldungen bleiben gültig."
@@ -415,7 +415,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Supprimer %@\u{00A0}?",
         removeHint: "Seule la copie conservée par Vorssaint est supprimée. La connexion elle-même reste active.",
         autoSwapFormat: "Changer %@ automatiquement",
-        autoSwapHint: "Quand la connexion utilisée approche de sa limite, la connexion enregistrée qui a le plus de marge prend le relais.",
+        autoSwapHint: "Quand la connexion utilisée approche de sa limite, la connexion enregistrée qui a le plus de marge prend le relais. Cela se produit aussi quand l’écran est en veille ou le Mac verrouillé.",
         threshold: "Changer à",
         privacy: "Tant que cette section est activée, Vorssaint envoie le jeton de chaque connexion Claude enregistrée à api.anthropic.com pour lire ses limites et le renouvelle sur platform.claude.com à son expiration. Pour une connexion Codex, il lance l’outil de Codex lui-même. Rien d’autre ne quitte votre Mac. Les connexions restent dans votre Trousseau et dans le dossier privé de Vorssaint, et ne font jamais partie d’une sauvegarde des réglages.",
         howTo: "Pour ajouter un autre compte, connectez-vous dans un terminal avec claude auth login ou codex login. Vorssaint remarque la nouvelle connexion et propose de l’enregistrer. Les connexions enregistrées restent valides."
@@ -459,7 +459,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Rimuovere %@?",
         removeHint: "Viene eliminata solo la copia conservata da Vorssaint. L’accesso in sé resta attivo.",
         autoSwapFormat: "Cambia %@ automaticamente",
-        autoSwapHint: "Quando l’accesso in uso si avvicina al limite, subentra l’accesso salvato con più margine.",
+        autoSwapHint: "Quando l’accesso in uso si avvicina al limite, subentra l’accesso salvato con più margine. Succede anche con lo schermo in stop o il Mac bloccato.",
         threshold: "Cambia al",
         privacy: "Finché questa sezione è attiva, Vorssaint invia il token di ogni accesso Claude salvato ad api.anthropic.com per leggerne i limiti e lo rinnova su platform.claude.com quando scade. Per un accesso Codex avvia lo strumento di Codex stesso. Nient’altro lascia il tuo Mac. Gli accessi restano nel tuo Portachiavi e nella cartella privata di Vorssaint e non fanno mai parte di un backup delle impostazioni.",
         howTo: "Per aggiungere un altro account, accedi in un terminale con claude auth login o codex login. Vorssaint nota il nuovo accesso e propone di salvarlo. Gli accessi salvati restano validi."
@@ -503,7 +503,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "Удалить %@?",
         removeHint: "Удаляется только копия, которую хранит Vorssaint. Сам вход остаётся активным.",
         autoSwapFormat: "Переключать %@ автоматически",
-        autoSwapHint: "Когда используемый вход приближается к лимиту, его заменяет сохранённый вход с наибольшим запасом.",
+        autoSwapHint: "Когда используемый вход приближается к лимиту, его заменяет сохранённый вход с наибольшим запасом. Это происходит и тогда, когда дисплей в режиме сна или Mac заблокирован.",
         threshold: "Переключать при",
         privacy: "Пока этот раздел включён, Vorssaint отправляет токен каждого сохранённого входа Claude на api.anthropic.com, чтобы прочитать его лимиты, и обновляет его на platform.claude.com по истечении срока. Для входа Codex запускается собственный инструмент Codex. Больше ничего не покидает ваш Mac. Входы хранятся в Связке ключей и в личной папке Vorssaint и никогда не попадают в резервную копию настроек.",
         howTo: "Чтобы добавить ещё одну учётную запись, войдите в неё в терминале командой claude auth login или codex login. Vorssaint заметит новый вход и предложит сохранить его. Сохранённые входы остаются действительными."
@@ -547,7 +547,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "%@ kaldırılsın mı?",
         removeHint: "Yalnızca Vorssaint’in sakladığı kopya silinir. Oturumun kendisi açık kalır.",
         autoSwapFormat: "%@ için otomatik geçiş",
-        autoSwapHint: "Kullanılan oturum sınırına yaklaştığında, en çok payı kalan kayıtlı oturum devralır.",
+        autoSwapHint: "Kullanılan oturum sınırına yaklaştığında, en çok payı kalan kayıtlı oturum devralır. Bu, ekran uykudayken veya Mac kilitliyken de gerçekleşir.",
         threshold: "Geçiş eşiği",
         privacy: "Bu bölüm açıkken Vorssaint, sınırlarını okumak için kayıtlı her Claude oturumunun belirtecini api.anthropic.com adresine gönderir ve süresi dolduğunda platform.claude.com üzerinden yeniler. Codex oturumu için Codex’in kendi aracını başlatır. Başka hiçbir şey Mac’inizden çıkmaz. Oturumlar Anahtar Zinciri’nizde ve Vorssaint’in özel klasöründe kalır, hiçbir zaman ayar yedeğine girmez.",
         howTo: "Başka bir hesap eklemek için terminalde claude auth login veya codex login ile giriş yapın. Vorssaint yeni oturumu fark eder ve kaydetmeyi önerir. Kayıtlı oturumlar geçerli kalır."
@@ -591,7 +591,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "%@を削除しますか？",
         removeHint: "削除されるのはVorssaintが保持するコピーだけです。ログイン自体はそのまま残ります。",
         autoSwapFormat: "%@を自動で切り替える",
-        autoSwapHint: "使用中のログインが上限に近づくと、最も余裕のある保存済みログインに切り替わります。",
+        autoSwapHint: "使用中のログインが上限に近づくと、最も余裕のある保存済みログインに切り替わります。ディスプレイのスリープ中やMacのロック中にも行われます。",
         threshold: "切り替えるタイミング",
         privacy: "このセクションがオンの間、Vorssaintは保存済みの各Claudeログインのトークンをapi.anthropic.comに送信して上限を読み取り、期限が切れるとplatform.claude.comで更新します。Codexのログインでは、Codex自身のツールを起動します。それ以外は何もMacの外に出ません。ログインはキーチェーンとVorssaintの専用フォルダに保存され、設定のバックアップには含まれません。",
         howTo: "別のアカウントを追加するには、ターミナルでclaude auth loginまたはcodex loginを使ってログインします。Vorssaintが新しいログインを検出し、保存を提案します。保存済みのログインは有効なままです。"
@@ -635,7 +635,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "%@을(를) 제거할까요?",
         removeHint: "Vorssaint가 보관하는 사본만 삭제됩니다. 로그인 자체는 그대로 유지됩니다.",
         autoSwapFormat: "%@ 자동 전환",
-        autoSwapHint: "사용 중인 로그인이 한도에 가까워지면 여유가 가장 많은 저장된 로그인이 이어받습니다.",
+        autoSwapHint: "사용 중인 로그인이 한도에 가까워지면 여유가 가장 많은 저장된 로그인이 이어받습니다. 디스플레이가 잠자기 상태이거나 Mac이 잠겨 있을 때에도 이루어집니다.",
         threshold: "전환 시점",
         privacy: "이 섹션이 켜져 있는 동안 Vorssaint는 저장된 각 Claude 로그인의 토큰을 api.anthropic.com으로 보내 한도를 읽고, 만료되면 platform.claude.com에서 갱신합니다. Codex 로그인의 경우 Codex 자체 도구를 실행합니다. 그 밖에는 아무것도 Mac을 떠나지 않습니다. 로그인은 키체인과 Vorssaint의 비공개 폴더에 보관되며 설정 백업에는 포함되지 않습니다.",
         howTo: "다른 계정을 추가하려면 터미널에서 claude auth login 또는 codex login으로 로그인하세요. Vorssaint가 새 로그인을 감지하고 저장을 제안합니다. 저장된 로그인은 계속 유효합니다."
@@ -679,7 +679,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "移除 %@？",
         removeHint: "只会删除 Vorssaint 保留的副本。登录本身保持不变。",
         autoSwapFormat: "自动切换 %@",
-        autoSwapHint: "当正在使用的登录接近限额时，由余量最多的已保存登录接替。",
+        autoSwapHint: "当正在使用的登录接近限额时，由余量最多的已保存登录接替。显示器睡眠或 Mac 锁定时也会进行。",
         threshold: "切换时机",
         privacy: "此部分开启期间，Vorssaint 会将每个已保存 Claude 登录的令牌发送到 api.anthropic.com 以读取其限额，并在过期时通过 platform.claude.com 续期。对于 Codex 登录，它会启动 Codex 自己的工具。除此之外没有任何内容离开你的 Mac。登录保存在你的钥匙串和 Vorssaint 的私有文件夹中，绝不会包含在设置备份里。",
         howTo: "要添加另一个账户，请在终端中使用 claude auth login 或 codex login 登录。Vorssaint 会发现新的登录并提供保存。已保存的登录仍然有效。"
@@ -723,7 +723,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "移除 %@？",
         removeHint: "只會刪除 Vorssaint 保留的副本。登入本身維持不變。",
         autoSwapFormat: "自動切換 %@",
-        autoSwapHint: "當使用中的登入接近限額時，由餘量最多的已儲存登入接手。",
+        autoSwapHint: "當使用中的登入接近限額時，由餘量最多的已儲存登入接手。顯示器睡眠或 Mac 鎖定時也會進行。",
         threshold: "切換時機",
         privacy: "此區段開啟期間，Vorssaint 會將每個已儲存 Claude 登入的權杖傳送到 api.anthropic.com 以讀取其限額，並在過期時透過 platform.claude.com 更新。對於 Codex 登入，它會啟動 Codex 自己的工具。除此之外沒有任何內容離開你的 Mac。登入儲存在你的鑰匙圈和 Vorssaint 的私人檔案夾中，絕不會包含在設定備份裡。",
         howTo: "若要加入另一個帳號，請在終端機中使用 claude auth login 或 codex login 登入。Vorssaint 會發現新的登入並提供儲存。已儲存的登入仍然有效。"
@@ -767,7 +767,7 @@ extension NotchAccountStrings {
         removeConfirmFormat: "移除 %@？",
         removeHint: "只會刪除 Vorssaint 保留的副本。登入本身維持不變。",
         autoSwapFormat: "自動切換 %@",
-        autoSwapHint: "當使用中的登入接近限額時，由餘量最多的已儲存登入接手。",
+        autoSwapHint: "當使用中的登入接近限額時，由餘量最多的已儲存登入接手。顯示器睡眠或 Mac 鎖定時也會進行。",
         threshold: "切換時機",
         privacy: "此部分開啟期間，Vorssaint 會將每個已儲存 Claude 登入的權杖傳送至 api.anthropic.com 以讀取其限額，並在過期時透過 platform.claude.com 更新。對於 Codex 登入，它會啟動 Codex 自己的工具。除此之外沒有任何內容離開你的 Mac。登入儲存在你的鑰匙圈和 Vorssaint 的私人資料夾中，絕不會包含在設定備份內。",
         howTo: "如要加入另一個帳戶，請在終端機中使用 claude auth login 或 codex login 登入。Vorssaint 會發現新的登入並提供儲存。已儲存的登入仍然有效。"

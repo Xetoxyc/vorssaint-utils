@@ -35,6 +35,10 @@ enum AgentAccountAutoSwapTests {
     }
 
     static func run(_ suite: TestSuite) {
+        let away = { (on: Set<AgentProvider>) in AgentAutoSwap.runsWhileAway([.claude, .codex], autoSwaps: on.contains) }
+        suite.expect(!away([]) && away([.claude]) && away([.codex]) && !away([.copilot]),
+                     "limits are still read while the island is away once an automatic swap is on for a provider that swaps")
+
         let roomy = [login("b", limits(50)), login("c", limits(30)), login("d", limits(40))]
 
         suite.expect(decide(active: limits(89.9), roomy) == .stay && target(decide(active: limits(90), roomy)) == "c"

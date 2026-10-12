@@ -1087,6 +1087,8 @@ final class NotchService: ObservableObject {
             if session.canRunTimer { NotchTimerService.shared.syncWithPreferences() }
             else { NotchTimerService.shared.suspend() }
             NotchLockScreenService.shared.sync(session)
+            // An automatic swap turned on or off meanwhile starts or stops its reading.
+            AgentAccountService.shared.pause()
             return
         }
         // Checked before any service starts, so each preference change while

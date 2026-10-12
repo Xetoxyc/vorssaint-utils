@@ -41,6 +41,13 @@ enum AgentAutoSwap {
     /// Two logins both near the threshold would otherwise trade places.
     static let cooldown: TimeInterval = 5 * 60
 
+    /// An automatic swap is for long runs nobody watches: with it on for any
+    /// provider, limits are still read while the island is away, as with the
+    /// display asleep or the Mac locked.
+    static func runsWhileAway(_ providers: [AgentProvider], autoSwaps: (AgentProvider) -> Bool) -> Bool {
+        providers.contains(where: autoSwaps)
+    }
+
     /// The share of a login's tightest limit that is used, whichever window
     /// that is. Nil without a reading.
     static func binding(_ limits: AgentLimits?) -> Double? {
