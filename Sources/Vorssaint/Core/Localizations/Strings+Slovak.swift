@@ -720,6 +720,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "Rozdeliť metriky do samostatných položiek",
         monitorSeparateMenuBarMetricsCaption: "Každá metrika sa stane samostatnou položkou v lište s ponukami, ktorú môžete so stlačeným ⌘ potiahnuť na požadované miesto. Pri zapnutom spájaní zostanú využitie a teplota spolu.",
         monitorReverseMenuBarOrder: "Obrátiť poradie",
+        monitorReverseMenuBarOrderCaption: "Obráti poradie metrík a presunie ikonu Vorssaint na druhý koniec položky.",
         monitorNetworkUploadFirst: "Odosielanie nad sťahovaním",
         monitorShowCPU: "CPU",
         monitorShowMemory: "Pamäť",

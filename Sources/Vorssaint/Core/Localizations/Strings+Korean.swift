@@ -721,6 +721,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "지표를 개별 메뉴 막대 항목으로 분리",
         monitorSeparateMenuBarMetricsCaption: "각 지표가 개별 메뉴 막대 항목이 되어 ⌘을 누른 채 드래그해 원하는 위치에 놓을 수 있습니다. 결합이 켜져 있으면 사용량과 온도를 함께 표시합니다.",
         monitorReverseMenuBarOrder: "순서 반대로",
+        monitorReverseMenuBarOrderCaption: "지표 순서를 반대로 바꾸고 Vorssaint 아이콘을 항목의 반대쪽 끝으로 옮깁니다.",
         monitorNetworkUploadFirst: "업로드를 다운로드 위에 표시",
         monitorShowCPU: "CPU",
         monitorShowMemory: "메모리",

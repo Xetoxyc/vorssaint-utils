@@ -720,6 +720,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "Messwerte in eigene Elemente trennen",
         monitorSeparateMenuBarMetricsCaption: "Jeder Messwert wird zu einem eigenen Menüleistenelement, das du mit ⌘ an die gewünschte Stelle ziehen kannst. Auslastung und Temperatur bleiben zusammen, wenn Kombinieren aktiv ist.",
         monitorReverseMenuBarOrder: "Reihenfolge umkehren",
+        monitorReverseMenuBarOrderCaption: "Kehrt die Reihenfolge der Messwerte um und setzt das Vorssaint-Symbol ans andere Ende des Elements.",
         monitorNetworkUploadFirst: "Upload über Download",
         monitorShowCPU: "CPU",
         monitorShowMemory: "Speicher",

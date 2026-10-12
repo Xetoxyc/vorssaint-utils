@@ -721,6 +721,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "將指標分成獨立項目",
         monitorSeparateMenuBarMetricsCaption: "每個指標都會成為獨立的選單列項目，可按住 ⌘ 拖移到想要的位置。合併開啟時使用率和溫度仍會保持在一起。",
         monitorReverseMenuBarOrder: "反轉順序",
+        monitorReverseMenuBarOrderCaption: "反轉指標順序，並將 Vorssaint 圖示移到項目的另一端。",
         monitorNetworkUploadFirst: "上傳顯示在下載上方",
         monitorShowCPU: "CPU",
         monitorShowMemory: "記憶體",

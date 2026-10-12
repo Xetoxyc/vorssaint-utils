@@ -720,6 +720,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "Metrikleri kendi öğelerine ayır",
         monitorSeparateMenuBarMetricsCaption: "Her metrik, ⌘ tuşunu basılı tutarak istediğiniz yere sürükleyebileceğiniz ayrı bir menü çubuğu öğesi olur. Birleştirme açıkken kullanım ile sıcaklık birlikte kalır.",
         monitorReverseMenuBarOrder: "Sırayı ters çevir",
+        monitorReverseMenuBarOrderCaption: "Ölçüm sırasını ters çevirir ve Vorssaint simgesini öğenin diğer ucuna taşır.",
         monitorNetworkUploadFirst: "Yükleme indirme üstünde",
         monitorShowCPU: "CPU",
         monitorShowMemory: "Bellek",

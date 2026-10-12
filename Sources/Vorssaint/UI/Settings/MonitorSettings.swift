@@ -18,6 +18,7 @@ struct MonitorSettings: View {
     @AppStorage(DefaultsKey.menuBarMetricSpacing) private var metricSpacing = "standard"
     @AppStorage(DefaultsKey.menuBarMetricAppearance) private var metricAppearance = "values"
     @AppStorage(DefaultsKey.menuBarHideIconWithMetrics) private var hideIconWithMetrics = false
+    @AppStorage(DefaultsKey.menuBarIconTrailing) private var iconTrailing = false
     @AppStorage(DefaultsKey.monitorInterval) private var interval = 2
     @AppStorage(DefaultsKey.monitorGraphScale) private var graphScale = true
     @AppStorage(DefaultsKey.temperatureUnit) private var temperatureUnit = TemperatureUnit.celsius.rawValue
@@ -93,8 +94,8 @@ struct MonitorSettings: View {
     }
 
     /// The readings that can sit in the menu bar, as tiles in the order they
-    /// appear there. The reverse and split controls sit here too, because
-    /// they belong to that order.
+    /// appear there. The reverse control sits here too, because it belongs
+    /// to that order.
     private var menuBarCard: some View {
         SettingsCard {
             Text(l10n.s.monitorMenuBarCaption)
@@ -106,15 +107,12 @@ struct MonitorSettings: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Divider()
-            SettingsRow(symbol: "arrow.left.arrow.right", title: l10n.s.monitorReverseMenuBarOrder) {
+            SettingsRow(symbol: "arrow.left.arrow.right", title: l10n.s.monitorReverseMenuBarOrder,
+                        caption: l10n.s.monitorReverseMenuBarOrderCaption) {
                 Button(l10n.s.monitorReverseMenuBarOrder) {
                     MenuBarMetric.setOrder(MenuBarMetric.order(in: .standard).reversed())
+                    iconTrailing.toggle()
                 }
-            }
-            SettingsRow(symbol: "rectangle.split.3x1", title: l10n.s.monitorSeparateMenuBarMetrics,
-                        caption: appearance.allowsCombinedTemperatures
-                            ? l10n.s.monitorSeparateMenuBarMetricsCaption : nil) {
-                Toggle(l10n.s.monitorSeparateMenuBarMetrics, isOn: $separateMetrics).labelsHidden()
             }
         }
     }
@@ -152,6 +150,11 @@ struct MonitorSettings: View {
             SettingsRow(symbol: "eye.slash", title: l10n.s.menuBarHideIconToggle,
                         caption: l10n.s.menuBarHideIconCaption) {
                 Toggle(l10n.s.menuBarHideIconToggle, isOn: $hideIconWithMetrics).labelsHidden()
+            }
+            SettingsRow(symbol: "rectangle.split.3x1", title: l10n.s.monitorSeparateMenuBarMetrics,
+                        caption: appearance.allowsCombinedTemperatures
+                            ? l10n.s.monitorSeparateMenuBarMetricsCaption : nil) {
+                Toggle(l10n.s.monitorSeparateMenuBarMetrics, isOn: $separateMetrics).labelsHidden()
             }
         }
     }

@@ -720,6 +720,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "メトリクスを個別の項目に分ける",
         monitorSeparateMenuBarMetricsCaption: "各メトリクスが個別のメニューバー項目になり、⌘ を押しながらドラッグして好きな位置に並べられます。結合がオンなら使用率と温度は一緒に表示します。",
         monitorReverseMenuBarOrder: "順序を反転",
+        monitorReverseMenuBarOrderCaption: "メトリクスの順序を反転し、Vorssaint のアイコンを項目の反対側に移動します。",
         monitorNetworkUploadFirst: "アップロードをダウンロードの上に表示",
         monitorShowCPU: "CPU",
         monitorShowMemory: "メモリ",

@@ -697,6 +697,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "Виводити метрики окремими елементами",
         monitorSeparateMenuBarMetricsCaption: "Кожна метрика стає окремим елементом смуги меню, який можна перетягнути на потрібне місце, утримуючи ⌘. Навантаження і температура лишаються разом, якщо увімкнене об’єднання.",
         monitorReverseMenuBarOrder: "Обернути порядок",
+        monitorReverseMenuBarOrderCaption: "Змінює порядок метрик на зворотний і переносить значок Vorssaint на інший край елемента.",
         monitorNetworkUploadFirst: "Показувати віддачу над завантаженням",
         monitorShowCPU: "CPU",
         monitorShowMemory: "Пам’ять",

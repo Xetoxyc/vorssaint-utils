@@ -720,6 +720,7 @@ extension Strings {
         monitorSeparateMenuBarMetrics: "Separar métricas en elementos propios",
         monitorSeparateMenuBarMetricsCaption: "Cada métrica pasa a ser un elemento propio de la barra de menús, que puedes arrastrar con ⌘ a donde quieras. Uso y temperatura siguen juntos cuando combinar está activo.",
         monitorReverseMenuBarOrder: "Invertir orden",
+        monitorReverseMenuBarOrderCaption: "Invierte el orden de las métricas y mueve el icono de Vorssaint al otro extremo del elemento.",
         monitorNetworkUploadFirst: "Subida encima de descarga",
         monitorShowCPU: "CPU",
         monitorShowMemory: "Memoria",
