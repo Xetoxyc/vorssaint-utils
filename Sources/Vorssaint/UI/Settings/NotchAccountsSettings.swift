@@ -42,8 +42,6 @@ struct NotchAccountsSettingsControls: View {
                 }
                 Text(text.privacy).font(.caption).foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(text.howTo).font(.caption).foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .toggleStyle(.switch)
@@ -79,6 +77,13 @@ struct NotchAccountsSettingsControls: View {
             if case .unsaved = status {
                 Button(text.saveThisLogin) { service.saveLiveLogin(provider) }
             }
+            // One sign-in at a time, and none while the island is off.
+            Button(text.addLogin) { service.beginAdd(provider) }
+                .disabled(status == nil || service.adding?.isUnderWay == true)
+        }
+        if let adding = service.adding, adding.provider == provider {
+            NotchAccountAddPanel(state: adding, text: text, cancel: l10n.s.uninstallerCancel, service: service)
+                .padding(.leading, settingsRowTextInset)
         }
         ForEach(service.accounts.filter { $0.account.provider == provider }) { state in
             NotchAccountSettingsRow(state: state, text: text) { service.rename(state.id, label: $0) }
@@ -98,6 +103,99 @@ struct NotchAccountsSettingsControls: View {
         case .unsaved(let email): return text.signedIn(email)
         case .saved(let id):
             return text.signedIn(service.accounts.first { $0.id == id }?.account.email ?? "")
+        }
+    }
+}
+
+/// A login being added, under its provider: what the person does next while
+/// the provider's own sign-in runs, and how it ended when it did not work.
+private struct NotchAccountAddPanel: View {
+    let state: AddLoginState
+    let text: NotchAccountStrings
+    let cancel: String
+    let service: AgentAccountService
+    @State private var code = ""
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            switch state {
+            case .starting:
+                waiting(text.addStarting)
+            case .claude(let url):
+                hint(text.addClaudeHint)
+                HStack(spacing: 8) {
+                    TextField(text.addCodePlaceholder, text: $code)
+                        .textFieldStyle(.roundedBorder)
+                        .font(.body.monospaced())
+                        .frame(maxWidth: 260)
+                        .onSubmit(submit)
+                    Button(text.addContinue, action: submit)
+                        .keyboardShortcut(.defaultAction)
+                        .disabled(code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+                HStack(spacing: 8) {
+                    Button(text.addOpenBrowser) { NSWorkspace.shared.open(url) }
+                    Button(cancel, role: .cancel) { service.cancelAdd() }
+                }
+            case .codex(let url, let code):
+                hint(text.addCodexHint)
+                Button(url.absoluteString) { NSWorkspace.shared.open(url) }
+                    .buttonStyle(.link)
+                HStack(spacing: 12) {
+                    Text(code)
+                        .font(.system(size: 24, weight: .semibold, design: .monospaced))
+                        .textSelection(.enabled)
+                    Button(text.addCopy) {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(code, forType: .string)
+                    }
+                }
+                HStack(spacing: 12) {
+                    waiting(text.addWaiting)
+                    Button(cancel, role: .cancel) { service.cancelAdd() }
+                }
+            case .finishing:
+                waiting(text.addFinishing)
+            case .failed(let provider, let message):
+                failure(text.addFailed, detail: message, provider: provider)
+            case .toolMissing(let provider):
+                failure(text.message(.toolMissing, provider: provider), detail: "", provider: provider)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    private func submit() {
+        service.submitCode(code)
+    }
+
+    private func hint(_ message: String) -> some View {
+        Text(message).font(.callout).fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func waiting(_ message: String) -> some View {
+        HStack(spacing: 8) {
+            ProgressView().controlSize(.small)
+            Text(message).font(.callout).foregroundStyle(.secondary)
+        }
+    }
+
+    /// `detail` is the sign-in tool's own last line, in its own language.
+    @ViewBuilder private func failure(_ message: String, detail: String, provider: AgentProvider) -> some View {
+        Label(message, systemImage: "exclamationmark.triangle.fill")
+            .font(.callout)
+            .foregroundStyle(.orange)
+            .fixedSize(horizontal: false, vertical: true)
+        if !detail.isEmpty {
+            Text(detail).font(.caption.monospaced()).foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .textSelection(.enabled)
+        }
+        HStack(spacing: 8) {
+            Button(text.addTryAgain) { service.beginAdd(provider) }
+            Button(text.addDismiss) { service.cancelAdd() }
         }
     }
 }

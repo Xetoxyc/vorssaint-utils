@@ -27,7 +27,7 @@ struct NotchAccountsView: View {
         Group {
             if providers.isEmpty {
                 NotchEmptyView(symbol: NotchModule.accounts.symbol, message: text.empty) {
-                    NotchPillButton(title: text.settings, prominent: true) {
+                    NotchPillButton(title: text.addLoginLabel, prominent: true) {
                         NotchService.shared.openSettings(showing: .accounts)
                     }
                 }
@@ -67,6 +67,18 @@ struct NotchAccountsView: View {
                         if provider == .claude ? autoSwapClaude : autoSwapCodex {
                             NotchAgentChip(text: text.auto, tint: provider.tint)
                         }
+                        // Signing in happens in Settings, where there is room for it.
+                        Button {
+                            NotchService.shared.openSettings(showing: .accounts)
+                        } label: {
+                            Image(systemName: "plus").font(.system(size: 10, weight: .medium))
+                                .foregroundStyle(.secondary)
+                                .frame(width: 17, height: 17)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .help(text.addLoginLabel)
+                        .accessibilityLabel(text.addLoginLabel)
                         if first {
                             Button {
                                 NotchService.shared.openSettings(showing: .accounts)
