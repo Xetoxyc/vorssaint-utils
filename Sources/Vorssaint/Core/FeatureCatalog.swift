@@ -421,7 +421,7 @@ extension AppFeature {
         features(in: .dynamicIsland).filter { $0 != .notch }
     }
 
-    /// Agents reads local session histories, Agent Accounts keeps logins, and
+    /// Agents reads local session histories, AI Accounts keeps logins, and
     /// the companion changes the resting island. Each is a separate choice
     /// when installing the island.
     static var dynamicIslandInitialExtensions: [AppFeature] {

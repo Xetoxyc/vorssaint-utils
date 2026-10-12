@@ -5,7 +5,7 @@ import AppKit
 import Combine
 import Foundation
 
-/// The person's choices for the Agent Accounts section, read by their keys
+/// The person's choices for the AI Accounts section, read by their keys
 /// so the service does not depend on where they are registered.
 struct AgentAccountPreferences {
     var isEnabled: () -> Bool
@@ -36,7 +36,7 @@ struct AgentAccountPreferences {
     }
 }
 
-/// Keeps several logins for Claude Code and Codex while the Agent Accounts
+/// Keeps several logins for Claude Code and Codex while the AI Accounts
 /// section is on: reads each one's limits, swaps the live login when the
 /// person taps another, and on its own when they asked for that and the
 /// live one nears its limit.

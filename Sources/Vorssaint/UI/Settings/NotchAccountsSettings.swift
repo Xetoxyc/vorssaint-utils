@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-/// The Agent Accounts options, under its row in the Dynamic Island settings.
+/// The AI Accounts options, under its row in the Dynamic Island settings.
 /// `isOn` is the section's own switch, the one its row in the list toggles.
 struct NotchAccountsSettingsControls: View {
     @Binding var isOn: Bool

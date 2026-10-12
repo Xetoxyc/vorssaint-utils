@@ -697,7 +697,7 @@ enum FeatureCatalogTests {
         suite.expect(AppFeature.notch.initialInstallGroup
                         == AppFeature.features(in: .dynamicIsland).filter { $0 != .notchMascot && $0 != .notchAgents && $0 != .notchAccounts }
                      && AppFeature.mixer.initialInstallGroup == [.mixer],
-                     "choosing the island keeps Agents, Agent Accounts and the companion as separate installs")
+                     "choosing the island keeps Agents, AI Accounts and the companion as separate installs")
         suite.expect(AppFeature.dynamicIslandExtensions.contains(.notchMascot)
                         && !AppFeature.notch.initialInstallGroup.contains(.notchMascot)
                         && AppFeature.notchMascot.permissions.isEmpty
@@ -710,7 +710,7 @@ enum FeatureCatalogTests {
                         && AppFeature.notchAccounts.enabledKeys == [DefaultsKey.notchAccountsEnabled]
                         && AppFeature.notchAccounts.settingsDestination == FeatureSettingsDestination(.notch)
                         && FeatureVisibilitySupport.features(for: .notch).contains(.notchAccounts),
-                     "Agent Accounts is a beta that only comes when picked and is set up on the island's page")
+                     "AI Accounts is a beta that only comes when picked and is set up on the island's page")
         suite.expect(AppPermission.allCases.map(\.rawValue) == [
             "accessibility", "screenRecording", "fullDiskAccess", "filesAndFolders", "notifications",
             "automationFinder", "automationTerminal", "automationPlayback", "audioCapture", "microphone", "camera",

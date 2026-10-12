@@ -1611,7 +1611,7 @@ enum NotchSupport {
         }
     }
 
-    /// Agent Accounts is installed, switched on and shown, and so is the
+    /// AI Accounts is installed, switched on and shown, and so is the
     /// island: only then are logins read and swapped.
     static func keepsAccounts(in defaults: UserDefaults = .standard) -> Bool {
         isEnabled(in: defaults) && modules(in: defaults).contains(.accounts)

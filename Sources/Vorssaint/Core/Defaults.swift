@@ -873,7 +873,7 @@ enum DefaultsKey {
     static let notchAgentsLimitThreshold = "notchAgentsLimitThreshold"
     static let notchAgentsDailyBudget = "notchAgentsDailyBudget"
     static let notchAgentsPriceUpdates = "notchAgentsPriceUpdates"
-    // Agent accounts: the saved logins themselves live outside preferences, in the Keychain and the app's private folder.
+    // AI accounts: the saved logins themselves live outside preferences, in the Keychain and the app's private folder.
     static let notchAccountsEnabled = "notchAccountsEnabled"
     static let notchAccountsAutoSwapClaude = "notchAccountsAutoSwapClaude"
     static let notchAccountsAutoSwapCodex = "notchAccountsAutoSwapCodex"

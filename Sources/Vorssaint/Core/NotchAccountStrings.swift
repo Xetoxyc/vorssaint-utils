@@ -130,7 +130,7 @@ extension FeatureStrings {
 
 extension NotchAccountStrings {
     static let enUS = NotchAccountStrings(
-        title: "Agent Accounts",
+        title: "AI Accounts",
         hubDescription: "Keep several Claude Code and Codex logins, see each one’s limits and swap between them in the Dynamic Island, by tap or automatically.",
         settingsDescription: "Keeps several logins for Claude Code and Codex, shows each one’s limits and swaps the one in use.",
         empty: "No saved logins yet. Add one with “Add login” in Settings.",
@@ -144,7 +144,7 @@ extension NotchAccountStrings {
         switchToFormat: "Switch to %@",
         unsavedFormat: "%@ is signed in and not saved",
         save: "Save",
-        settings: "Agent Accounts settings",
+        settings: "AI Accounts settings",
         usageRateLimited: "Asked too often. Limits will be read again later.",
         usageToolMissingFormat: "%@ was not found on this Mac.",
         usageUnavailable: "Limits could not be read.",
@@ -188,7 +188,7 @@ extension NotchAccountStrings {
     )
 
     static let uk = NotchAccountStrings(
-        title: "Облікові записи агентів",
+        title: "Облікові записи ШІ",
         hubDescription: "Зберігайте кілька входів у Claude Code і Codex, стежте за лімітами кожного й перемикайте їх у Dynamic Island дотиком або автоматично.",
         settingsDescription: "Зберігає кілька входів у Claude Code і Codex, показує ліміти кожного й перемикає активний.",
         empty: "Збережених входів ще немає. Додайте вхід кнопкою «Додати вхід» у Налаштуваннях.",
@@ -202,7 +202,7 @@ extension NotchAccountStrings {
         switchToFormat: "Перемкнути на %@",
         unsavedFormat: "%@: вхід виконано, але не збережено",
         save: "Зберегти",
-        settings: "Налаштування облікових записів агентів",
+        settings: "Налаштування облікових записів ШІ",
         usageRateLimited: "Забагато запитів. Ліміти буде прочитано пізніше.",
         usageToolMissingFormat: "%@ не знайдено на цьому Mac.",
         usageUnavailable: "Не вдалося прочитати ліміти.",
@@ -246,7 +246,7 @@ extension NotchAccountStrings {
     )
 
     static let ptBR = NotchAccountStrings(
-        title: "Contas de agentes",
+        title: "Contas de IA",
         hubDescription: "Mantenha vários logins do Claude Code e do Codex, veja os limites de cada um e troque entre eles na Dynamic Island, com um toque ou automaticamente.",
         settingsDescription: "Mantém vários logins do Claude Code e do Codex, mostra os limites de cada um e troca o que está em uso.",
         empty: "Nenhum login salvo ainda. Adicione um com “Adicionar login” nos Ajustes.",
@@ -260,7 +260,7 @@ extension NotchAccountStrings {
         switchToFormat: "Trocar para %@",
         unsavedFormat: "%@ está conectado e não foi salvo",
         save: "Salvar",
-        settings: "Ajustes das contas de agentes",
+        settings: "Ajustes das contas de IA",
         usageRateLimited: "Muitas consultas. Os limites serão lidos de novo mais tarde.",
         usageToolMissingFormat: "%@ não foi encontrado neste Mac.",
         usageUnavailable: "Não foi possível ler os limites.",
@@ -304,7 +304,7 @@ extension NotchAccountStrings {
     )
 
     static let es = NotchAccountStrings(
-        title: "Cuentas de agentes",
+        title: "Cuentas de IA",
         hubDescription: "Guarda varios inicios de sesión de Claude Code y Codex, consulta los límites de cada uno y cambia entre ellos en la Dynamic Island, con un toque o automáticamente.",
         settingsDescription: "Guarda varios inicios de sesión de Claude Code y Codex, muestra los límites de cada uno y cambia el que está en uso.",
         empty: "Aún no hay inicios de sesión guardados. Añade uno con “Añadir inicio de sesión” en Ajustes.",
@@ -318,7 +318,7 @@ extension NotchAccountStrings {
         switchToFormat: "Cambiar a %@",
         unsavedFormat: "%@ tiene la sesión iniciada y no está guardado",
         save: "Guardar",
-        settings: "Ajustes de cuentas de agentes",
+        settings: "Ajustes de cuentas de IA",
         usageRateLimited: "Demasiadas consultas. Los límites se leerán de nuevo más tarde.",
         usageToolMissingFormat: "%@ no se ha encontrado en este Mac.",
         usageUnavailable: "No se han podido leer los límites.",
@@ -362,7 +362,7 @@ extension NotchAccountStrings {
     )
 
     static let sk = NotchAccountStrings(
-        title: "Účty agentov",
+        title: "AI účty",
         hubDescription: "Majte uložených viac prihlásení do Claude Code a Codexu, sledujte limity každého z nich a prepínajte medzi nimi v Dynamic Islande ťuknutím alebo automaticky.",
         settingsDescription: "Uchováva viac prihlásení do Claude Code a Codexu, zobrazuje limity každého z nich a prepína to, ktoré sa práve používa.",
         empty: "Zatiaľ nie sú uložené žiadne prihlásenia. Pridajte ho cez „Pridať prihlásenie“ v Nastaveniach.",
@@ -376,7 +376,7 @@ extension NotchAccountStrings {
         switchToFormat: "Prepnúť na %@",
         unsavedFormat: "%@ je prihlásený a nie je uložený",
         save: "Uložiť",
-        settings: "Nastavenia účtov agentov",
+        settings: "Nastavenia AI účtov",
         usageRateLimited: "Príliš veľa požiadaviek. Limity sa načítajú znova neskôr.",
         usageToolMissingFormat: "%@ sa na tomto Macu nenašiel.",
         usageUnavailable: "Limity sa nepodarilo načítať.",
@@ -420,7 +420,7 @@ extension NotchAccountStrings {
     )
 
     static let de = NotchAccountStrings(
-        title: "Agenten-Accounts",
+        title: "KI-Accounts",
         hubDescription: "Mehrere Anmeldungen für Claude Code und Codex behalten, die Limits jeder einzelnen sehen und in der Dynamic Island zwischen ihnen wechseln, per Klick oder automatisch.",
         settingsDescription: "Behält mehrere Anmeldungen für Claude Code und Codex, zeigt die Limits jeder einzelnen und wechselt die verwendete.",
         empty: "Noch keine Anmeldungen gesichert. Füge eine über „Anmeldung hinzufügen“ in den Einstellungen hinzu.",
@@ -434,7 +434,7 @@ extension NotchAccountStrings {
         switchToFormat: "Zu %@ wechseln",
         unsavedFormat: "%@ ist angemeldet und nicht gesichert",
         save: "Sichern",
-        settings: "Einstellungen für Agenten-Accounts",
+        settings: "Einstellungen für KI-Accounts",
         usageRateLimited: "Zu oft abgefragt. Die Limits werden später erneut gelesen.",
         usageToolMissingFormat: "%@ wurde auf diesem Mac nicht gefunden.",
         usageUnavailable: "Die Limits konnten nicht gelesen werden.",
@@ -478,7 +478,7 @@ extension NotchAccountStrings {
     )
 
     static let fr = NotchAccountStrings(
-        title: "Comptes d’agents",
+        title: "Comptes IA",
         hubDescription: "Conservez plusieurs connexions Claude Code et Codex, consultez les limites de chacune et passez de l’une à l’autre dans la Dynamic Island, d’un clic ou automatiquement.",
         settingsDescription: "Conserve plusieurs connexions Claude Code et Codex, affiche les limites de chacune et change celle qui est utilisée.",
         empty: "Aucune connexion enregistrée pour l’instant. Ajoutez-en une avec « Ajouter une connexion » dans les Réglages.",
@@ -492,7 +492,7 @@ extension NotchAccountStrings {
         switchToFormat: "Passer à %@",
         unsavedFormat: "%@ est connecté et n’est pas enregistré",
         save: "Enregistrer",
-        settings: "Réglages des comptes d’agents",
+        settings: "Réglages des comptes IA",
         usageRateLimited: "Trop de demandes. Les limites seront relues plus tard.",
         usageToolMissingFormat: "%@ est introuvable sur ce Mac.",
         usageUnavailable: "Impossible de lire les limites.",
@@ -536,7 +536,7 @@ extension NotchAccountStrings {
     )
 
     static let it = NotchAccountStrings(
-        title: "Account degli agenti",
+        title: "Account IA",
         hubDescription: "Conserva più accessi a Claude Code e Codex, controlla i limiti di ciascuno e passa dall’uno all’altro nella Dynamic Island, con un clic o automaticamente.",
         settingsDescription: "Conserva più accessi a Claude Code e Codex, mostra i limiti di ciascuno e cambia quello in uso.",
         empty: "Nessun accesso salvato. Aggiungine uno con “Aggiungi accesso” nelle Impostazioni.",
@@ -550,7 +550,7 @@ extension NotchAccountStrings {
         switchToFormat: "Passa a %@",
         unsavedFormat: "%@ ha effettuato l’accesso e non è salvato",
         save: "Salva",
-        settings: "Impostazioni degli account degli agenti",
+        settings: "Impostazioni degli account IA",
         usageRateLimited: "Troppe richieste. I limiti verranno letti di nuovo più tardi.",
         usageToolMissingFormat: "%@ non è stato trovato su questo Mac.",
         usageUnavailable: "Impossibile leggere i limiti.",
@@ -594,7 +594,7 @@ extension NotchAccountStrings {
     )
 
     static let ru = NotchAccountStrings(
-        title: "Учётные записи агентов",
+        title: "Учётные записи ИИ",
         hubDescription: "Храните несколько входов в Claude Code и Codex, следите за лимитами каждого и переключайте их в Dynamic Island нажатием или автоматически.",
         settingsDescription: "Хранит несколько входов в Claude Code и Codex, показывает лимиты каждого и переключает используемый.",
         empty: "Сохранённых входов пока нет. Добавьте вход кнопкой «Добавить вход» в Настройках.",
@@ -608,7 +608,7 @@ extension NotchAccountStrings {
         switchToFormat: "Переключить на %@",
         unsavedFormat: "%@: вход выполнен, но не сохранён",
         save: "Сохранить",
-        settings: "Настройки учётных записей агентов",
+        settings: "Настройки учётных записей ИИ",
         usageRateLimited: "Слишком много запросов. Лимиты будут прочитаны позже.",
         usageToolMissingFormat: "%@ не найден на этом Mac.",
         usageUnavailable: "Не удалось прочитать лимиты.",
@@ -652,7 +652,7 @@ extension NotchAccountStrings {
     )
 
     static let tr = NotchAccountStrings(
-        title: "Ajan Hesapları",
+        title: "YZ Hesapları",
         hubDescription: "Birden fazla Claude Code ve Codex oturumunu saklayın, her birinin sınırlarını görün ve Dynamic Island’da dokunarak veya otomatik olarak aralarında geçiş yapın.",
         settingsDescription: "Claude Code ve Codex için birden fazla oturumu saklar, her birinin sınırlarını gösterir ve kullanılanı değiştirir.",
         empty: "Henüz kayıtlı oturum yok. Ayarlar’daki “Oturum ekle” ile bir tane ekleyin.",
@@ -666,7 +666,7 @@ extension NotchAccountStrings {
         switchToFormat: "%@ hesabına geç",
         unsavedFormat: "%@ giriş yapmış ve kaydedilmemiş",
         save: "Kaydet",
-        settings: "Ajan Hesapları ayarları",
+        settings: "YZ Hesapları ayarları",
         usageRateLimited: "Çok sık soruldu. Sınırlar daha sonra yeniden okunacak.",
         usageToolMissingFormat: "%@ bu Mac’te bulunamadı.",
         usageUnavailable: "Sınırlar okunamadı.",
@@ -710,7 +710,7 @@ extension NotchAccountStrings {
     )
 
     static let ja = NotchAccountStrings(
-        title: "エージェントアカウント",
+        title: "AIアカウント",
         hubDescription: "Claude CodeとCodexの複数のログインを保持し、それぞれの上限を確認して、Dynamic Islandでタップまたは自動で切り替えます。",
         settingsDescription: "Claude CodeとCodexの複数のログインを保持し、それぞれの上限を表示して、使用中のログインを切り替えます。",
         empty: "保存済みのログインはまだありません。設定の「ログインを追加」で追加してください。",
@@ -724,7 +724,7 @@ extension NotchAccountStrings {
         switchToFormat: "%@に切り替える",
         unsavedFormat: "%@はログイン中ですが保存されていません",
         save: "保存",
-        settings: "エージェントアカウントの設定",
+        settings: "AIアカウントの設定",
         usageRateLimited: "問い合わせが多すぎます。上限は後でもう一度読み取ります。",
         usageToolMissingFormat: "%@はこのMacに見つかりませんでした。",
         usageUnavailable: "上限を読み取れませんでした。",
@@ -768,7 +768,7 @@ extension NotchAccountStrings {
     )
 
     static let ko = NotchAccountStrings(
-        title: "에이전트 계정",
+        title: "AI 계정",
         hubDescription: "Claude Code와 Codex 로그인을 여러 개 보관하고, 각 로그인의 한도를 확인하며, Dynamic Island에서 탭하거나 자동으로 전환합니다.",
         settingsDescription: "Claude Code와 Codex 로그인을 여러 개 보관하고, 각 로그인의 한도를 보여 주며, 사용 중인 로그인을 전환합니다.",
         empty: "저장된 로그인이 아직 없습니다. 설정의 ‘로그인 추가’로 추가하세요.",
@@ -782,7 +782,7 @@ extension NotchAccountStrings {
         switchToFormat: "%@(으)로 전환",
         unsavedFormat: "%@이(가) 로그인되어 있지만 저장되지 않았습니다",
         save: "저장",
-        settings: "에이전트 계정 설정",
+        settings: "AI 계정 설정",
         usageRateLimited: "너무 자주 요청했습니다. 한도는 나중에 다시 읽습니다.",
         usageToolMissingFormat: "이 Mac에서 %@을(를) 찾을 수 없습니다.",
         usageUnavailable: "한도를 읽을 수 없습니다.",
@@ -826,7 +826,7 @@ extension NotchAccountStrings {
     )
 
     static let zhHans = NotchAccountStrings(
-        title: "智能体账户",
+        title: "AI 账户",
         hubDescription: "保留多个 Claude Code 和 Codex 登录，查看各自的限额，并在 Dynamic Island 中轻点或自动切换。",
         settingsDescription: "保留多个 Claude Code 和 Codex 登录，显示各自的限额，并切换正在使用的登录。",
         empty: "尚未保存任何登录。请在设置中通过“添加登录”添加。",
@@ -840,7 +840,7 @@ extension NotchAccountStrings {
         switchToFormat: "切换到 %@",
         unsavedFormat: "%@ 已登录但未保存",
         save: "保存",
-        settings: "智能体账户设置",
+        settings: "AI 账户设置",
         usageRateLimited: "请求过于频繁。稍后将再次读取限额。",
         usageToolMissingFormat: "在这台 Mac 上找不到 %@。",
         usageUnavailable: "无法读取限额。",
@@ -884,7 +884,7 @@ extension NotchAccountStrings {
     )
 
     static let zhTW = NotchAccountStrings(
-        title: "代理程式帳號",
+        title: "AI 帳號",
         hubDescription: "保留多個 Claude Code 和 Codex 登入，查看各自的限額，並在 Dynamic Island 中點一下或自動切換。",
         settingsDescription: "保留多個 Claude Code 和 Codex 登入，顯示各自的限額，並切換正在使用的登入。",
         empty: "尚未儲存任何登入。請在設定中透過「加入登入」加入。",
@@ -898,7 +898,7 @@ extension NotchAccountStrings {
         switchToFormat: "切換到 %@",
         unsavedFormat: "%@ 已登入但尚未儲存",
         save: "儲存",
-        settings: "代理程式帳號設定",
+        settings: "AI 帳號設定",
         usageRateLimited: "要求過於頻繁。稍後將再次讀取限額。",
         usageToolMissingFormat: "在這部 Mac 上找不到 %@。",
         usageUnavailable: "無法讀取限額。",
@@ -942,7 +942,7 @@ extension NotchAccountStrings {
     )
 
     static let zhHK = NotchAccountStrings(
-        title: "代理程式帳戶",
+        title: "AI 帳戶",
         hubDescription: "保留多個 Claude Code 和 Codex 登入，查看各自的限額，並在 Dynamic Island 中點一下或自動切換。",
         settingsDescription: "保留多個 Claude Code 和 Codex 登入，顯示各自的限額，並切換正在使用的登入。",
         empty: "尚未儲存任何登入。請在設定中透過「加入登入」加入。",
@@ -956,7 +956,7 @@ extension NotchAccountStrings {
         switchToFormat: "切換至 %@",
         unsavedFormat: "%@ 已登入但尚未儲存",
         save: "儲存",
-        settings: "代理程式帳戶設定",
+        settings: "AI 帳戶設定",
         usageRateLimited: "要求過於頻繁。稍後將再次讀取限額。",
         usageToolMissingFormat: "在這部 Mac 上找不到 %@。",
         usageUnavailable: "無法讀取限額。",

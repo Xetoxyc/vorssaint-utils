@@ -1624,14 +1624,14 @@ enum NotchTests {
                "module order ignores unknown ids and duplicates, preserving newly added modules")
         defaults.set(true, forKey: DefaultsKey.notchAccountsEnabled)
         suite.expect(!NotchSupport.modules(in: defaults).contains(.accounts) && !NotchSupport.keepsAccounts(in: defaults),
-                     "Agent Accounts keeps no login until it is installed, whatever its switch says")
+                     "AI Accounts keeps no login until it is installed, whatever its switch says")
         defaults.set(true, forKey: AppFeature.notchAccounts.availabilityKey)
         suite.expect(NotchSupport.modules(in: defaults).last == .accounts && NotchSupport.keepsAccounts(in: defaults)
                         && NotchSupport.routes(.accounts, in: defaults),
-                     "installed and switched on, Agent Accounts has its page, reads logins and may post a swap")
+                     "installed and switched on, AI Accounts has its page, reads logins and may post a swap")
         defaults.set("accounts", forKey: DefaultsKey.notchHiddenModules)
         suite.expect(!NotchSupport.keepsAccounts(in: defaults) && !NotchSupport.routes(.accounts, in: defaults),
-                     "a hidden Agent Accounts page reads and swaps nothing")
+                     "a hidden AI Accounts page reads and swaps nothing")
         defaults.set("clipboard,unknown", forKey: DefaultsKey.notchHiddenModules)
         defaults.set(false, forKey: DefaultsKey.notchAccountsEnabled)
         defaults.set(false, forKey: AppFeature.notchAccounts.availabilityKey)

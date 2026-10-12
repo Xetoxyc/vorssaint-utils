@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-/// The Agent Accounts page: each provider's saved logins with their limits.
+/// The AI Accounts page: each provider's saved logins with their limits.
 /// A tap on a login that is not in use makes it the one the tool signs in with.
 struct NotchAccountsView: View {
     let size: CGSize
