@@ -93,7 +93,8 @@ struct MonitorSettings: View {
     }
 
     /// The readings that can sit in the menu bar, as tiles in the order they
-    /// appear there.
+    /// appear there. The reverse and split controls sit here too, because
+    /// they belong to that order.
     private var menuBarCard: some View {
         SettingsCard {
             Text(l10n.s.monitorMenuBarCaption)
@@ -104,6 +105,17 @@ struct MonitorSettings: View {
             Text(FeatureStrings.notchEditor(l10n.language).reorderHint)
                 .font(.caption)
                 .foregroundStyle(.secondary)
+            Divider()
+            SettingsRow(symbol: "arrow.left.arrow.right", title: l10n.s.monitorReverseMenuBarOrder) {
+                Button(l10n.s.monitorReverseMenuBarOrder) {
+                    MenuBarMetric.setOrder(MenuBarMetric.order(in: .standard).reversed())
+                }
+            }
+            SettingsRow(symbol: "rectangle.split.3x1", title: l10n.s.monitorSeparateMenuBarMetrics,
+                        caption: appearance.allowsCombinedTemperatures
+                            ? l10n.s.monitorSeparateMenuBarMetricsCaption : nil) {
+                Toggle(l10n.s.monitorSeparateMenuBarMetrics, isOn: $separateMetrics).labelsHidden()
+            }
         }
     }
 
@@ -140,11 +152,6 @@ struct MonitorSettings: View {
             SettingsRow(symbol: "eye.slash", title: l10n.s.menuBarHideIconToggle,
                         caption: l10n.s.menuBarHideIconCaption) {
                 Toggle(l10n.s.menuBarHideIconToggle, isOn: $hideIconWithMetrics).labelsHidden()
-            }
-            SettingsRow(symbol: "rectangle.split.3x1", title: l10n.s.monitorSeparateMenuBarMetrics,
-                        caption: appearance.allowsCombinedTemperatures
-                            ? l10n.s.monitorSeparateMenuBarMetricsCaption : nil) {
-                Toggle(l10n.s.monitorSeparateMenuBarMetrics, isOn: $separateMetrics).labelsHidden()
             }
         }
     }
