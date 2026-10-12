@@ -216,7 +216,8 @@ enum ClaudeCodeLogin {
 
     /// The answer of the usage endpoint as limit windows: the session, the
     /// week, and a week of its own for each model that has one. Nil when the
-    /// answer is not the object expected.
+    /// answer is not the object expected or names no window: an answer in a
+    /// shape not known here must not read as a login nobody has used.
     static func limits(usage data: Data, now: Date) -> AgentLimits? {
         guard let json = object(data) else { return nil }
         var windows: [AgentLimitWindow] = []
@@ -235,6 +236,7 @@ enum ClaudeCodeLogin {
                   !model.isEmpty else { continue }
             add(limit, id: "claude.sd.\(model.lowercased())", kind: .weekly, minutes: 10_080, scope: model, percent: "percent")
         }
+        guard !windows.isEmpty else { return nil }
         return AgentLimits(provider: .claude, windows: windows, observedAt: now, source: .account)
     }
 

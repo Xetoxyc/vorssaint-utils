@@ -16,9 +16,9 @@ struct AgentAccountSwitcher {
     enum SwitchFailure: Error, Equatable {
         /// The provider's tool held its locks the whole time.
         case busy
-        /// The tool is signed out. There is nothing to put back afterwards,
-        /// and nothing empty may ever replace a saved copy.
-        case liveLoginEmpty
+        /// The tool is signed in with something that has no plan to swap,
+        /// such as an API key, which is not replaced.
+        case unsupported
         /// A copy or the tool's own files could not be read or written; the
         /// text is for logs and support. Nothing changed, or it was put back.
         case copyUnavailable(String)
@@ -38,12 +38,14 @@ struct AgentAccountSwitcher {
         do {
             return try adapter.withLocks {
                 // Read again now that the tool cannot write: this is the
-                // login to keep and to go back to if the swap fails.
-                guard let live = try adapter.readLive() else { return .failure(.liveLoginEmpty) }
-                if live.id == id { return .success(.alreadyActive) }
-                // The tool rotates its tokens while it runs. A copy from the
-                // day the login was saved would swap back to a dead one.
-                if store.account(live.id) != nil { try store.capture(live, now: now()) }
+                // login to keep. A signed-out tool has none, so the swap
+                // signs it in and no copy is touched.
+                if let live = try adapter.readLive() {
+                    if live.id == id { return .success(.alreadyActive) }
+                    // The tool rotates its tokens while it runs. A copy from the
+                    // day the login was saved would swap back to a dead one.
+                    if store.account(live.id) != nil { try store.capture(live, now: now()) }
+                }
                 guard let copy = try store.credential(for: id) else {
                     return .failure(.copyUnavailable("the saved login has no copy"))
                 }
@@ -53,7 +55,7 @@ struct AgentAccountSwitcher {
         } catch AgentLoginError.busy {
             return .failure(.busy)
         } catch AgentLoginError.unsupported {
-            return .failure(.liveLoginEmpty)
+            return .failure(.unsupported)
         } catch AgentLoginError.unreadable(let message) {
             return .failure(.copyUnavailable(message))
         } catch {

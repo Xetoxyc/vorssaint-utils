@@ -376,15 +376,22 @@ enum AgentAccountTests {
         try? Data("not json".utf8).write(to: world.configURL)
         let writes = world.secrets.writes
         let unparseable = world.switcher.switch(to: "acct-a/org-a")
-        suite.expect(isNone { try world.adapter.readLive() } && unparseable == .failure(.liveLoginEmpty) && world.secrets.writes == writes,
+        suite.expect(isNone { try world.adapter.readLive() } && unparseable == .failure(.copyUnavailable(".claude.json is not a JSON object"))
+                        && world.secrets.writes == writes,
                      "a config file that cannot be read stops the swap before anything is written")
         world.signIn("b")
 
-        world.live = #"{"claudeAiOauth":{"accessToken":"","refreshToken":""},"mcpOAuth":{}}"#
-        let emptied = world.secrets.items
-        suite.expect(world.switcher.switch(to: "acct-a/org-a") == .failure(.liveLoginEmpty) && world.secrets.items == emptied
+        // Signed out: the item is left without tokens, as after `claude auth logout`.
+        world.live = #"{"claudeAiOauth":{"accessToken":"","refreshToken":""},"mcpOAuth":{"kept":true}}"#
+        suite.expect(world.switcher.switch(to: "acct-a/org-a") == .success(.switched) && access(world.live) == "at-a"
+                        && (json(world.live.map { Data($0.utf8) })["mcpOAuth"] as? [String: Bool]) == ["kept": true]
                         && access(world.copy("b")) == "at-b",
-                     "a live login without tokens is never swapped away from, so nothing empty replaces a copy")
+                     "a signed-out Claude Code is signed in by the swap, and nothing empty replaces a copy")
+        world.live = nil
+        try? Data(#"{"numStartups":7}"#.utf8).write(to: world.configURL)
+        suite.expect(world.switcher.switch(to: "acct-b/org-b") == .success(.switched) && access(world.live) == "at-b"
+                        && (try? world.adapter.readLive())?.id == "acct-b/org-b" && world.config.contains(#""numStartups":7"#),
+                     "without an item or an identity the swap writes both and keeps the rest of the config")
     }
 
     // MARK: Codex
@@ -465,7 +472,12 @@ enum AgentAccountTests {
                      "the login swapped away from is saved again with the tokens it had rotated to")
 
         try? FileManager.default.removeItem(at: live)
-        suite.expect(switcher.switch(to: "c0de-2") == .failure(.liveLoginEmpty) && !FileManager.default.fileExists(atPath: live.path),
-                     "a signed-out Codex is left signed out")
+        suite.expect(switcher.switch(to: "c0de-2") == .success(.switched) && (try? Data(contentsOf: live)) == rotated
+                        && (try? copies.read("c0de-1")) == first,
+                     "a signed-out Codex is signed in by the swap")
+        let key = Data(#"{"auth_mode":"apikey","OPENAI_API_KEY":"sk-test","tokens":null}"#.utf8)
+        try? key.write(to: live)
+        suite.expect(switcher.switch(to: "c0de-1") == .failure(.unsupported) && (try? Data(contentsOf: live)) == key,
+                     "an API key's login is not replaced")
     }
 }

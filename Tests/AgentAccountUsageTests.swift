@@ -59,8 +59,8 @@ enum AgentAccountUsageTests {
                         && windows.last?.resetsAt == nil && AgentAutoSwap.binding(limits) == 100,
                      "use is kept within a hundred percent, renewals read with or without fractions of a second, and extra usage is left out")
         suite.expect(ClaudeCodeLogin.limits(usage: Data("[]".utf8), now: now) == nil
-                        && ClaudeCodeLogin.limits(usage: Data(#"{"five_hour":null}"#.utf8), now: now)?.windows.isEmpty == true,
-                     "an answer that is not the object expected is no reading, and one without windows is an empty one")
+                        && ClaudeCodeLogin.limits(usage: Data(#"{"five_hour":null,"usage":{"percent":40}}"#.utf8), now: now) == nil,
+                     "an answer that is not the object expected, or names no window known here, is no reading rather than an unused login")
 
         let soon = AgentAccountTests.claudeCredential("a", expires: now.addingTimeInterval(299))
         let later = AgentAccountTests.claudeCredential("a", expires: now.addingTimeInterval(301))
