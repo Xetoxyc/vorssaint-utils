@@ -1767,6 +1767,7 @@ enum FeatureCatalogTests {
                    "screenshot next-number format keeps its specifier (\(language.rawValue))")
             let strings: Strings = {
                 switch language {
+                case .ar: return .ar
                 case .enUS: return .enUS
                 case .ptBR: return .ptBR
                 case .tr: return .tr
