@@ -723,6 +723,8 @@ extension Strings {
         monitorCombineTemperaturesCaption: "عند تفعيل استخدام وحرارة العنصر نفسه، يُعرضان في كتلة واحدة.",
         monitorSeparateMenuBarMetrics: "فصل المقاييس في عناصر مستقلة",
         monitorSeparateMenuBarMetricsCaption: "يفصل الكتل النشطة في شريط القوائم، ويبقي الاستخدام والحرارة معًا عند تفعيل الدمج.",
+        monitorReverseMenuBarOrder: "عكس الترتيب",
+        monitorReverseMenuBarOrderCaption: "يعكس ترتيب القياسات وينقل أيقونة Vorssaint إلى الطرف الآخر من العنصر.",
         monitorNetworkUploadFirst: "الرفع فوق التنزيل",
         monitorShowCPU: "CPU",
         monitorShowMemory: "الذاكرة",

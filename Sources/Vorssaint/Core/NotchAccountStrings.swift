@@ -124,6 +124,8 @@ extension FeatureStrings {
         case .zhHans: return .zhHans
         case .zhTW: return .zhTW
         case .zhHK: return .zhHK
+        // local-build only: Arabic arrives with #2992, the Agent Accounts catalog has no table yet.
+        case .ar: return .enUS
         }
     }
 }

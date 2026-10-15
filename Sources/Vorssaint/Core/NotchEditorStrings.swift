@@ -165,7 +165,8 @@ extension FeatureStrings {
             downloadsSummary: "التنزيلات الجارية والمكتملة للتو.",
             scratchpadSummary: "ملاحظات سريعة تُحفظ تلقائيًا.",
             agentsSummary: "استخدام Claude Code وCodex وOpenCode وGitHub Copilot وحدودها وتكاليفها.",
-            watchSummary: "قراءة مباشرة لأي جزء من نافذة وتنبيه عند تغيره."
+            watchSummary: "قراءة مباشرة لأي جزء من نافذة وتنبيه عند تغيره.",
+            accountsSummary: "عدة تسجيلات دخول لـ Claude Code وCodex، وحدود كل منها، والتبديل بنقرة."
         )
         case .enUS: return NotchEditorStrings(
             layout: "Layout",
