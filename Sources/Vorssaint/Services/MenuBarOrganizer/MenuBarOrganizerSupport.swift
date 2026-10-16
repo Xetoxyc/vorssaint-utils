@@ -161,6 +161,19 @@ enum MenuBarOrganizerAvailability {
 enum MenuBarOrganizerPolicy {
     static let agentBundleID = "com.apple.MenuBarAgent"
 
+    /// Accessory processes macOS starts for a moment that never own a status
+    /// item. The screenshot shortcuts start the first one, and opening the
+    /// bar for it showed every hidden icon right in the capture.
+    static let iconlessHelpers: Set<String> = ["com.apple.screencaptureui"]
+
+    /// Whether a launch may bring a new icon, so the bar opens to let it in.
+    /// Not for Vorssaint itself, not for a background-only process (it cannot
+    /// own a status item) and not for a helper known to come without one.
+    static func launchMayAddIcon(bundleID: String?, backgroundOnly: Bool, ownBundleID: String) -> Bool {
+        guard let bundleID, bundleID != ownBundleID, !backgroundOnly else { return false }
+        return !iconlessHelpers.contains(bundleID)
+    }
+
     /// A system item hides through its index unless macOS pins it; the
     /// agent's other items have no index. For apps the allowlist works per
     /// bundle id, so an item can only be hidden when its host has one, and
