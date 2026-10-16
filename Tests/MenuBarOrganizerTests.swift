@@ -316,6 +316,16 @@ enum MenuBarOrganizerTests {
         suite.expect(verdict(system("focus")) == [false, false], "a system item without an index neither hides nor moves")
         suite.expect(verdict(identity("com.example.alpha")) == [true, true] && verdict(collapser) == [false, true],
                      "apps are judged as before")
+
+        func opens(_ bundleID: String?, backgroundOnly: Bool = false) -> Bool {
+            MenuBarOrganizerPolicy.launchMayAddIcon(bundleID: bundleID, backgroundOnly: backgroundOnly, ownBundleID: own)
+        }
+        suite.expect(opens("com.example.alpha") && opens("com.apple.TextInputMenuAgent"),
+                     "an app or agent launch opens the bar for its icon")
+        suite.expect(!opens("com.apple.screencaptureui"),
+                     "the screenshot helper never brings an icon, so the shortcut leaves the bar collapsed")
+        suite.expect(!opens(nil) && !opens(own) && !opens("com.example.alpha", backgroundOnly: true),
+                     "no bundle, Vorssaint itself and background-only processes do not open the bar")
     }
 
     private static func availability(_ suite: TestSuite) {
