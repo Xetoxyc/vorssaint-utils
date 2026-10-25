@@ -1748,6 +1748,10 @@ extension NotchAgentStrings {
         claudeLimitsMenuBar: "يتحقق Claude من حدودك فقط عندما تظهر أيقونته في شريط القوائم. فعّلها في إعداداته لتظهر الحدود هنا خلال دقائق.",
         claudeLimitsNoApp: "تأتي حدود الخطة من تطبيق Claude غير الموجود على هذا الـMac. حتى ذلك الحين، تُقدّر جلسة الخمس ساعات من نشاط Claude Code.",
         claudeLimitsPrivacy: "يقرأ Vorssaint النسب التي يحفظها تطبيق Claude على هذا الـMac. لا يستخدم تسجيل الدخول ولا يرسل شيئًا.",
+        claudeCodeMissing: "Claude Code was not found on this Mac.",
+        claudeCodeSignedOut: "Sign in to Claude Code so it can check your account’s limits.",
+        claudeCodeOutdated: "Update Claude Code so it can check your account’s limits.",
+        claudeCodeUnreachable: "Claude Code could not check your account’s limits. It tries again later.",
         openClaude: "فتح Claude",
         getClaude: "الحصول على تطبيق Claude",
         priceUpdates: "تحديث الأسعار باستمرار",
@@ -1769,5 +1773,6 @@ extension NotchAgentStrings {
         resetsSignIn: "سجّل الدخول إلى Codex بخطة لرؤية إعادات التعيين",
         resetsUpdate: "حدّث Codex لاستخدام إعادات التعيين هنا",
         resetsCheckFailed: "تعذر التحقق من إعادات التعيين",
-        resetsHelp: "تجدد إعادة التعيين حدود جلسة Codex والأسبوع معًا. يتحقق Codex منها باستخدام تسجيل دخوله الخاص الذي لا يقرؤه Vorssaint مطلقًا.")
+        resetsHelp: "تجدد إعادة التعيين حدود جلسة Codex والأسبوع معًا. يتحقق Codex منها باستخدام تسجيل دخوله الخاص الذي لا يقرؤه Vorssaint مطلقًا."
+    )
 }

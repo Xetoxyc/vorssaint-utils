@@ -124,6 +124,8 @@ extension FeatureStrings {
             hoverPreview: "معاينة عند التحويم",
             hoverExpand: "توسيع عند التحويم",
             hiddenUntilHover: "مخفي حتى التحويم",
+            hiddenShowsActivity: "Show activity and indicators",
+            hiddenShowsActivityHint: "Comes into view while an activity runs or an indicator shows, then hides again.",
             resting: "في وضع الراحة",
             destinations: "أماكن الفتح",
             separate: "نافذة مستقلة",

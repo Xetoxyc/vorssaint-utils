@@ -621,6 +621,7 @@ extension MouseButtonFeatureStrings {
         captureWheel: "يفتح هذا الزر القائمة الدائرية بالفعل. اختر آخر أو ألغِ تعيينه هناك أولًا.",
         captureExists: "هذا الزر أو الاتجاه موجود بالفعل في القائمة أدناه.",
         captureHint: "إذا لم يحدث شيء، فقد يستخدم برنامج الماوس هذا العنصر بالفعل.",
+        middleButtonName: "Middle button",
         backButtonName: "زر الرجوع الجانبي",
         forwardButtonName: "زر التقدم الجانبي",
         otherButtonFormat: "الزر %d",

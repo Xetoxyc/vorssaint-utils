@@ -937,10 +937,13 @@ extension AppUpdateStrings {
         skipVersionFormat: "تخطي الإصدار %@",
         excludeApp: "عدم التحقق من هذا التطبيق",
         rulesTitle: "قواعد التحديث",
+        addException: "Add an app that should not be checked",
         skippedVersionFormat: "تم تخطي الإصدار %@",
         excludedApp: "لن يتم التحقق حتى إزالة هذه القاعدة",
         removeRule: "إزالة القاعدة",
         rulesHint: "يسمح تخطي إصدار بالتحقق من الإصدارات الأحدث. بعد إزالة استثناء تطبيق، استخدم التحقق الآن لتحديث النتائج.",
-        noVisibleUpdates: "لا توجد تحديثات خارج قواعدك"
+        noVisibleUpdates: "لا توجد تحديثات خارج قواعدك",
+        uncomparableVersions: "Versions not compared",
+        uncomparableVersionsNote: "No update is shown when an app’s own version can’t be compared with the catalog. Check for updates in the app itself."
     )
 }

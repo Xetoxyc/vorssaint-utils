@@ -96,9 +96,13 @@ extension FeatureStrings {
             liveEqualizerHint: "يستمع إلى مخرج صوت المشغّل لتحريك الأشرطة. يطلب macOS مرة واحدة السماح بتسجيل صوت النظام. لا يُحفظ شيء ولا يُرسل. دون الإذن، تحتفظ الأشرطة بحركتها المعتادة.",
             liveEqualizerUnavailable: "يتطلب macOS 14.4 أو أحدث.",
             shuffle: "تشغيل عشوائي",
+            showVolume: "Show volume in the player",
             preferredPlayer: "الفتح عندما لا يُشغّل شيء",
             preferredPlayerHint: "يفتح الغلاف وأزرار التشغيل هذا التطبيق. يفتح الخيار التلقائي آخر تطبيق موسيقى استخدمته، ثم Spotify أو Apple Music.",
-            openNamedPlayer: "فتح %@")
+            openNamedPlayer: "فتح %@",
+            browserCovers: "Find covers for Firefox and Zen",
+            browserCoversHint: "When Firefox, Zen or another Firefox-based browser plays without a sharp cover, read its saved session on this Mac to find the song’s YouTube tab and load its thumbnail from i.ytimg.com. If no tab shows the song but a YouTube Music tab is open, send the song title, artist and region to itunes.apple.com and load the album art from mzstatic.com."
+        )
         case .enUS: return NotchMusicExtrasStrings(
             lyrics: "Lyrics",
             lyricsDescription: "Follow the lyrics of the current song in the Dynamic Island.",

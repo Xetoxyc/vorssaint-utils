@@ -36,7 +36,6 @@ extension Strings {
         menuMinimize: "تصغير",
         menuZoom: "تكبير",
         menuClose: "إغلاق",
-
         minutes15: "15 دقيقة",
         minutes30: "30 دقيقة",
         hour1: "ساعة",
@@ -45,11 +44,9 @@ extension Strings {
         hours8: "8 ساعات",
         indefinitely: "بلا حد زمني",
         indefinite: "غير محدد",
-
         panelSettings: "الإعدادات",
         panelQuit: "إنهاء",
         panelHotkeyHint: "الاختصار يبدّل الحالة",
-
         keepAwakeTitle: "إبقاء الاستيقاظ",
         keepAwakeEndsIn: "ينتهي خلال",
         keepAwakeUntilDisabled: "نشط حتى توقفه",
@@ -79,7 +76,6 @@ extension Strings {
         clamshellNeedsSession: "يُطبق عند تفعيل “إبقاء الاستيقاظ”",
         clamshellReady: "جاهز. التبديل دون كلمة مرور",
         clamshellNeedsPassword: "سيطلب كلمة مرور المسؤول مرة واحدة",
-
         systemSection: "النظام",
         temperatures: "درجات الحرارة",
         cpuLabel: "CPU",
@@ -97,7 +93,6 @@ extension Strings {
         monitorUnavailable: "المستشعرات غير متاحة على هذا الـMac",
         energyAppsTitle: "تطبيقات تستهلك طاقة كبيرة",
         energyAppsIdle: "لا يوجد استهلاك كبير للطاقة",
-
         notifySessionEndedTitle: "انتهت الجلسة",
         notifySessionEndedBody: "انتهى الوقت. سيعود الـMac إلى السكون المعتاد.",
         notifyBatteryTitle: "تم إيقاف Vorssaint",
@@ -108,7 +103,6 @@ extension Strings {
         adminPromptUpdate: "يحتاج Vorssaint إلى كلمة مرورك لتثبيت التحديث.",
         adminPromptSudoersInstall: "سينشئ Vorssaint قاعدة محدودة (pmset disablesleep فقط) لتبديل وضع الغطاء المغلق دون طلب كلمة مرور. هذه المرة الوحيدة التي تحتاج فيها إلى كلمة المرور.",
         adminPromptSudoersRemove: "سيزيل Vorssaint قاعدة الغطاء المغلق التي لا تتطلب كلمة مرور.",
-
         settingsTitle: "إعدادات Vorssaint",
         tabGeneral: "عام",
         tabEnergy: "الطاقة",
@@ -139,7 +133,6 @@ extension Strings {
         advancedUninstallConfirmBody: "سيمسح Vorssaint أذوناته ويزيل تفضيلاته وينتقل إلى سلة المهملات ثم يُغلق. لا يمكن التراجع من التطبيق، لكنه يبقى في سلة المهملات حتى إفراغها.",
         advancedUninstallFailedTitle: "توقف إلغاء التثبيت",
         advancedUninstallFailedBody: "تعذر على Vorssaint استعادة إعداد نظام غيّره: السكون أو سرعة المراوح أو تسارع الماوس أو ترتيب المساحات. لم يُحذف شيء. حاول مجددًا واسمح بطلب كلمة المرور إن ظهر.",
-
         launchAtLogin: "التشغيل عند تسجيل الدخول",
         languageLabel: "اللغة",
         menuBarSection: "شريط القوائم",
@@ -147,7 +140,6 @@ extension Strings {
         globalHotkeySection: "الاختصار العام",
         hotkeyToggle: "تفعيل اختصار “إبقاء الاستيقاظ”",
         hotkeyCaption: "يعمل في أي تطبيق دون أذونات إضافية.",
-
         sessionSection: "الجلسة",
         defaultDurationLabel: "المدة الافتراضية",
         keepAwakeAutoStart: "إبقاء الاستيقاظ عند فتح Vorssaint",
@@ -162,7 +154,6 @@ extension Strings {
         clamshellExplanation: "يعطّل “الاستمرار مع إغلاق الغطاء” السكون تمامًا أثناء تفعيل “إبقاء الاستيقاظ”، ويُلغى تلقائيًا عند انتهاء الجلسة أو إغلاق التطبيق. يُفضل استخدامه عند الاتصال بالطاقة.",
         dimScreenOnLidCloseTitle: "خفض سطوع الشاشة إلى الصفر",
         dimScreenOnLidCloseCaption: "يعتّم الشاشة عند إغلاق الغطاء ويعيد سطوعها عند فتحه.",
-
         scrollSection: "التمرير",
         invertMouseScroll: "عكس تمرير الماوس",
         invertMouseScrollCaption: "يعكس اتجاه عجلة الماوس.",
@@ -214,7 +205,6 @@ extension Strings {
         launcherEmptyState: "كل الأدوات مخفية. استخدم زر الضبط لإعادتها.",
         launcherAddSection: "إعادة الإضافة",
         launcherKeysHint: "الأسهم للتنقل، Enter للفتح، والأرقام 1 إلى 9 للفتح المباشر",
-
         switcherSection: "مبدّل النوافذ",
         switcherEnable: "استخدام مبدّل Vorssaint",
         switcherEnableCaption: "التبديل بين التطبيقات والنوافذ، بما فيها النوافذ المصغرة والنوافذ المتعددة للتطبيق نفسه.",
@@ -277,7 +267,6 @@ extension Strings {
         dockPreviewClosePanel: "إغلاق المعاينة",
         dockPreviewPreviousWindow: "النافذة السابقة",
         dockPreviewNextWindow: "النافذة التالية",
-
         cutPasteName: "القص واللصق",
         cutPasteEnable: "قص الملفات ولصقها في Finder",
         cutPasteEnableCaption: "استخدم ⌘X للقص و⌘V لنقل الملفات والمجلدات في Finder.",
@@ -298,7 +287,6 @@ extension Strings {
         cutSomeFailed: "تعذر نقل بعض العناصر",
         cutMovingTitle: "جارٍ النقل…",
         cutMovingCountFormat: "%d من %d",
-
         autoQuitName: "الإنهاء عند الإغلاق",
         autoQuitEnable: "إنهاء التطبيق عند إغلاق آخر نافذة",
         autoQuitEnableCaption: "يؤدي إغلاق آخر نافذة للتطبيق إلى إنهائه أيضًا.",
@@ -312,7 +300,6 @@ extension Strings {
         autoQuitExceptionsCaption: "تبقى تطبيقات هذه القائمة مفتوحة حتى دون نوافذ.",
         autoQuitExceptionsEmpty: "لا توجد استثناءات",
         autoQuitAddApp: "إضافة تطبيق…",
-
         uninstallerName: "أداة إلغاء التثبيت",
         uninstallerEnableCaption: "يزيل التطبيق مع ذاكرة التخزين المؤقت والتفضيلات والسجلات والملفات المتبقية.",
         uninstallerStep1: "اسحب تطبيقًا إلى الإعدادات أو اختره من القائمة.",
@@ -356,7 +343,14 @@ extension Strings {
         uninstallerCommandBarCaption: "اختيار التطبيقات وإلغاء تثبيتها من شريط الأوامر.",
         uninstallerCommandBarFinderTitle: "إلغاء تثبيت التطبيق المحدد في Finder",
         uninstallerSelectionUnavailable: "حدد تطبيقًا يمكن إزالته في Finder أو اختر آخر من القائمة.",
-
+        uninstallerRefusedNotApp: "Only apps can be uninstalled.",
+        uninstallerRefusedSystemFormat: "%@ can’t be uninstalled because it’s part of macOS.",
+        uninstallerRefusedSharedFormat: "%@ can’t be uninstalled here because it shares files with macOS or other apps.",
+        uninstallerRefusedNestedFormat: "%@ can’t be uninstalled on its own because it’s part of another app.",
+        uninstallerRefusedSelfFormat: "Vorssaint can’t uninstall itself here. Use Settings › %@ instead.",
+        uninstallerRefusedLinkFormat: "%@ can’t be uninstalled because it’s a link to an app stored elsewhere.",
+        uninstallerRefusedUnidentifiedFormat: "%@ can’t be uninstalled because it can’t be identified as an app.",
+        uninstallerPickerHiddenNote: "Apps that are part of macOS or made by Apple aren’t listed.",
         urlCleanerName: "تنظيف الروابط",
         urlCleanerEnable: "تنظيف الروابط عند نسخها",
         urlCleanerEnableCaption: "يزيل معلمات التتبع من الرابط فور وصوله إلى الحافظة.",
@@ -372,7 +366,6 @@ extension Strings {
         urlCleanerCleaned: "تم تنظيف الرابط.",
         urlCleanerCopied: "تم النسخ.",
         urlCleanerLocalNote: "محلي. دون شبكة.",
-
         homebrewName: "Homebrew",
         homebrewEnableCaption: "البحث عن حزم formulae وcasks وتثبيتها وإزالتها.",
         homebrewMissingTitle: "لم يُعثر على Homebrew",
@@ -463,7 +456,6 @@ extension Strings {
         homebrewOperationHideDetails: "إخفاء التفاصيل",
         homebrewOperationTechnicalLog: "التفاصيل التقنية",
         homebrewOperationProgressUnknown: "لم يعلن Homebrew عن نسبة التقدم بعد.",
-
         mediaName: "الوسائط",
         mediaEnableCaption: "ضغط الفيديو وتحويل الصور ومعالجتها وإنشاء GIF واستخراج النص محليًا.",
         mediaLocalNote: "محلي. دون شبكة.",
@@ -524,7 +516,6 @@ extension Strings {
         mediaErrorNoVideo: "لا يحتوي هذا الملف على مسار فيديو.",
         mediaErrorSameOutput: "اختر وجهة تختلف عن الملف الأصلي.",
         mediaErrorUnsupported: "التنسيق غير مدعوم في macOS.",
-
         shelfName: "الرف",
         shelfEnable: "مساحة مؤقتة لسحب الملفات",
         shelfEnableCaption: "مساحة عائمة لجمع الملفات والصور والنصوص ثم سحبها إلى أي مكان لاحقًا.",
@@ -587,9 +578,7 @@ extension Strings {
         shelfActionShare: "مشاركة",
         shelfActionPin: "تثبيت",
         shelfActionUnpin: "إلغاء التثبيت",
-
         breakdownMeasuring: "جارٍ القياس…",
-
         mixerSection: "مازج الصوت",
         mixerEmpty: "تظهر التطبيقات التي تستخدم الصوت هنا",
         mixerUnavailable: "متاح على macOS 14.4 والأحدث",
@@ -637,7 +626,6 @@ extension Strings {
         audioPriorityUnavailable: "غير متاح",
         audioPriorityCurrent: "الحالي",
         audioPriorityCaption: "تُختار الأجهزة حسب الأولوية. عند توصيل جهاز أعلى أولوية، يصبح نشطًا. عند فصل الجهاز النشط، يتولى التالي المتاح المهمة.",
-
         updatesSection: "التحديثات",
         autoCheckToggle: "التحقق من التحديثات تلقائيًا",
         includeBetaUpdatesToggle: "تلقي التحديثات التجريبية",
@@ -657,7 +645,6 @@ extension Strings {
         updateNeedsApplicationsTitle: "نقل Vorssaint إلى التطبيقات",
         updateNeedsApplicationsBody: "يعمل التطبيق من مكان لا يمكن تحديثه، مثل صورة القرص أو موقع مؤقت للنظام. اسحب Vorssaint إلى مجلد التطبيقات وافتحه منه ثم حاول مجددًا.",
         menuCheckUpdates: "التحقق من التحديثات…",
-
         permissionRequired: "الإذن مطلوب",
         permissionAccessibility: "تسهيلات الاستخدام",
         permissionScreenRecording: "تسجيل الشاشة",
@@ -671,13 +658,14 @@ extension Strings {
         secureInputUnattributed: "لا يوجد تطبيق جارٍ يعلن استخدامه. سجّل الخروج ثم الدخول لإزالته.",
         secureInputUnidentified: "تعذر تحديد التطبيق الذي يستخدمه، لذا لا يستطيع Vorssaint الكتابة نيابة عنك.",
         secureInputRevealFormat: "إظهار %@",
-
+        secureInputSwitcherHeldFormat: "%@ was the active app when it turned on and may be holding it. Until it turns off, macOS hides your keystrokes from the switcher and ⌘Tab opens the macOS switcher instead. Dismiss its password field, or quit it, to release it.",
+        secureInputSwitcherUnattributed: "The app holding it cannot be named. Until it turns off, macOS hides your keystrokes from the switcher and ⌘Tab opens the macOS switcher instead. Dismiss any open password field, or log out and back in, to clear it.",
+        secureInputSwitcherUnidentified: "The app holding it could not be identified. Until it turns off, macOS hides your keystrokes from the switcher and ⌘Tab opens the macOS switcher instead.",
         aboutDescription: "مركز أدوات للـMac.\nالطاقة ومراقبة النظام والتمرير ومبدّل النوافذ، في شريط القوائم مباشرة.",
         versionPrefix: "الإصدار",
         reviewIntro: "مراجعة المقدمة",
         reviewHighlights: "مراجعة أبرز الميزات",
         viewOnGitHub: "عرض على GitHub",
-
         obContinue: "متابعة",
         obBack: "رجوع",
         obSkipStep: "تخطي هذه الخطوة",
@@ -715,9 +703,9 @@ extension Strings {
         obPurposeTitle: "ما الذي جاء بك إلى هنا؟",
         obPurposeBody: "اختر إعدادًا جاهزًا أو حدد بدقة ما تريد استخدامه.",
         obPurposeSkip: "يمكنك إضافة الميزات أو إزالتها لاحقًا في الإعدادات.",
-
         tabMonitor: "المراقبة",
         monitorMenuBarSection: "في شريط القوائم",
+        monitorMenuBarPreview: "Menu bar preview",
         monitorMenuBarCaption: "اختر ما يظهر بجوار الأيقونة في شريط القوائم.",
         monitorCombineTemperatures: "دمج الاستخدام والحرارة",
         monitorCombineTemperaturesCaption: "عند تفعيل استخدام وحرارة العنصر نفسه، يُعرضان في كتلة واحدة.",
@@ -741,7 +729,6 @@ extension Strings {
         panelFooterList: "قائمة",
         betaBadge: "تجريبي",
         betaFeatureWarning: "إصدار تجريبي. قد تواجه بعض الأخطاء.",
-
         networkSection: "الشبكة",
         networkIPAddresses: "عناوين IP",
         networkLocalIP: "IPv4 المحلي",
@@ -751,7 +738,6 @@ extension Strings {
         networkMeasuring: "جارٍ القياس…",
         networkApps: "التطبيقات التي تستخدم الشبكة",
         networkAppsIdle: "لا توجد تطبيقات تستخدم الشبكة الآن",
-
         diskSection: "الأقراص",
         diskUsed: "مستخدم",
         diskFree: "حر",
@@ -786,7 +772,6 @@ extension Strings {
         diskOpenInFinder: "فتح",
         diskStorageSettings: "التخزين",
         diskNoDisks: "لم يُعثر على أقراص موصولة.",
-
         powerSection: "الطاقة",
         powerSystem: "النظام",
         powerAdapter: "المحول",
@@ -803,7 +788,6 @@ extension Strings {
         monitorShowPeripheralBattery: "بطارية الملحقات",
         peripheralBatteryNoDevices: "لم يُعثر على أجهزة",
         monitorGraphsSection: "الرسوم البيانية",
-
         updateBannerTitle: "تحديث متاح",
         updateBannerAction: "تحديث",
         obStepMenuBarTitle: "المقاييس في شريط القوائم",
@@ -834,7 +818,6 @@ extension Strings {
         speedTestLatency: "زمن الاستجابة",
         speedTestTesting: "جارٍ الاختبار…",
         speedTestFailed: "فشل الاختبار",
-
         monitorShowInPanel: "إظهار في اللوحة",
         disclosureExpanded: "موسّع",
         disclosureCollapsed: "مطوي",
@@ -856,7 +839,6 @@ extension Strings {
         obStepPanelBody: "افتح كل كتلة واختر بدقة ما يظهر عند نقر الأيقونة.",
         obStepPanelNavigationTitle: "لوحة بالأقسام",
         obStepPanelNavigationBody: "يمكن للوحة الآن عرض قسم واحد في كل مرة. يمكنك التبديل بين الأقسام والقائمة في الإعدادات.",
-
         cleaningMenuItem: "وضع التنظيف",
         utilitiesSection: "الأدوات المساعدة",
         quickControlsSection: "عناصر التحكم",
@@ -889,7 +871,6 @@ extension Strings {
         cleaningStartNow: "قفل لوحة المفاتيح الآن",
         cleaningNeedsAxTitle: "تسهيلات الاستخدام مطلوبة",
         cleaningNeedsAxBody: "لقفل لوحة المفاتيح بأمان، يحتاج Vorssaint إلى إذن تسهيلات الاستخدام. امنحه في إعدادات النظام ثم حاول مجددًا.",
-
         tabSupport: "الدعم",
         shortcutsPageCaption: "تحرير كل الاختصارات العامة للميزات المثبتة على هذا الـMac. تبقى الاختصارات غير النشطة محفوظة لكنها لا تعمل.",
         shortcutsPageTitle: "اختصارات لوحة المفاتيح",

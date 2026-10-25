@@ -14,7 +14,7 @@ struct AutoQuitDockAppsStrings {
 extension FeatureStrings {
     static func autoQuitDockApps(_ language: AppLanguage) -> AutoQuitDockAppsStrings {
         switch language {
-        case .enUS: return .enUS
+        case .enUS, .ar: return .enUS
         case .ptBR: return .ptBR
         case .tr: return .tr
         case .ru: return .ru

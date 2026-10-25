@@ -159,6 +159,8 @@ enum ReleaseChangeAliases {
             "opencode", "github copilot", .island("agent"), .island("agents")]
         case .notchWatch: return [.exact("Watch")]
         case .notchMascot: return ["companion"]
+        case .notchAccounts: return ["ai accounts", "ai account", "claude accounts", "codex accounts", "account swap"]
+        case .menuBarOrganizer: return ["menu bar organizer", "menu bar icons", "hidden menu bar icons"]
         case .monitorCPU: return ["cpu temperature", "cpu load", "cpu readings", "per core", "per-core",
             "processor temperature", "process breakdowns", "cpu alert", "cpu and gpu temperatures"]
         case .monitorGPU: return ["gpu usage", "gpu load", "gpu temperature", "gpu temperatures",

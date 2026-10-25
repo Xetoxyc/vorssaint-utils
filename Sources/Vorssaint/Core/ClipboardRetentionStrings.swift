@@ -22,7 +22,7 @@ struct ClipboardRetentionStrings {
 extension FeatureStrings {
     static func clipboardRetention(_ language: AppLanguage) -> ClipboardRetentionStrings {
         switch language {
-        case .enUS: return .enUS
+        case .enUS, .ar: return .enUS
         case .ptBR: return .ptBR
         case .tr: return .tr
         case .ru: return .ru
