@@ -357,6 +357,14 @@ extension Strings {
         uninstallerCommandBarFinderTitle: "إلغاء تثبيت التطبيق المحدد في Finder",
         uninstallerSelectionUnavailable: "حدد تطبيقًا يمكن إزالته في Finder أو اختر آخر من القائمة.",
 
+        uninstallerRefusedNotApp: "يمكن إلغاء تثبيت التطبيقات فقط.",
+        uninstallerRefusedSystemFormat: "لا يمكن إلغاء تثبيت %@ لأنه جزء من macOS.",
+        uninstallerRefusedSharedFormat: "لا يمكن إلغاء تثبيت %@ هنا لأنه يشارك ملفات مع macOS أو تطبيقات أخرى.",
+        uninstallerRefusedNestedFormat: "لا يمكن إلغاء تثبيت %@ بمفرده لأنه جزء من تطبيق آخر.",
+        uninstallerRefusedSelfFormat: "لا يستطيع Vorssaint إلغاء تثبيت نفسه هنا. استخدم الإعدادات › %@ بدلًا من ذلك.",
+        uninstallerRefusedLinkFormat: "لا يمكن إلغاء تثبيت %@ لأنه رابط إلى تطبيق محفوظ في مكان آخر.",
+        uninstallerRefusedUnidentifiedFormat: "لا يمكن إلغاء تثبيت %@ لأنه تعذر التحقق من أنه تطبيق.",
+        uninstallerPickerHiddenNote: "لا تظهر التطبيقات التي هي جزء من macOS أو من صنع Apple في القائمة.",
         urlCleanerName: "تنظيف الروابط",
         urlCleanerEnable: "تنظيف الروابط عند نسخها",
         urlCleanerEnableCaption: "يزيل معلمات التتبع من الرابط فور وصوله إلى الحافظة.",
@@ -672,6 +680,9 @@ extension Strings {
         secureInputUnidentified: "تعذر تحديد التطبيق الذي يستخدمه، لذا لا يستطيع Vorssaint الكتابة نيابة عنك.",
         secureInputRevealFormat: "إظهار %@",
 
+        secureInputSwitcherHeldFormat: "كان %@ التطبيق النشط عند تفعيل الإدخال الآمن، وقد يكون هو من يبقيه مفعّلًا. يخفي macOS ضغطات المفاتيح عن مبدّل النوافذ حتى إيقاف الإدخال الآمن، ويفتح ⌘Tab مبدّل macOS بدلًا منه. أغلق حقل كلمة المرور أو أنهِ التطبيق لتحريره.",
+        secureInputSwitcherUnattributed: "لا يمكن تحديد التطبيق الذي يبقي الإدخال الآمن مفعّلًا. يخفي macOS ضغطات المفاتيح عن مبدّل النوافذ حتى إيقاف الإدخال الآمن، ويفتح ⌘Tab مبدّل macOS بدلًا منه. أغلق أي حقل كلمة مرور مفتوح، أو سجّل الخروج ثم الدخول لإزالته.",
+        secureInputSwitcherUnidentified: "تعذر تحديد التطبيق الذي يبقي الإدخال الآمن مفعّلًا. يخفي macOS ضغطات المفاتيح عن مبدّل النوافذ حتى إيقاف الإدخال الآمن، ويفتح ⌘Tab مبدّل macOS بدلًا منه.",
         aboutDescription: "مركز أدوات للـMac.\nالطاقة ومراقبة النظام والتمرير ومبدّل النوافذ، في شريط القوائم مباشرة.",
         versionPrefix: "الإصدار",
         reviewIntro: "مراجعة المقدمة",
@@ -718,6 +729,7 @@ extension Strings {
 
         tabMonitor: "المراقبة",
         monitorMenuBarSection: "في شريط القوائم",
+        monitorMenuBarPreview: "معاينة شريط القوائم",
         monitorMenuBarCaption: "اختر ما يظهر بجوار الأيقونة في شريط القوائم.",
         monitorCombineTemperatures: "دمج الاستخدام والحرارة",
         monitorCombineTemperaturesCaption: "عند تفعيل استخدام وحرارة العنصر نفسه، يُعرضان في كتلة واحدة.",
