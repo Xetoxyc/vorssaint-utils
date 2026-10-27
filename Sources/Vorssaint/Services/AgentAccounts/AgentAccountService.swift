@@ -317,13 +317,13 @@ final class AgentAccountService: ObservableObject {
         let outcome = flow.run(progress: { [weak self] step in
             DispatchQueue.main.async {
                 guard let self, attempt == self.addAttempt else { return }
-                // Each step comes once, so the page opens once; the panel can open it again.
                 switch step {
                 case .claude(let url):
+                    // Claude Code opens its page itself.
                     self.adding = .claude(url: url)
-                    NSWorkspace.shared.open(url)
                 case .codex(let url, let code):
                     self.adding = .codex(url: url, code: code)
+                    // Codex only prints its page; each step comes once, so it opens once.
                     NSWorkspace.shared.open(url)
                 case .finishing: self.adding = .finishing(provider)
                 }
