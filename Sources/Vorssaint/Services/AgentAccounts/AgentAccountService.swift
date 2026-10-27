@@ -61,6 +61,8 @@ final class AgentAccountService: ObservableObject {
     @Published private(set) var lastError: AgentAccountError?
     /// A login being added with the provider's own sign-in; one at a time.
     @Published private(set) var adding: AddLoginState?
+    /// The saved login that sign-in is renewing, when it is not a new one.
+    @Published private(set) var renewing: AgentAccount.ID?
     let events = PassthroughSubject<AgentAccountEvent, Never>()
 
     private static let tick: TimeInterval = 60
@@ -268,13 +270,16 @@ final class AgentAccountService: ObservableObject {
 
     // MARK: Adding a login (main thread)
 
-    /// Starts the provider's own sign-in for an account to add. It runs in a
-    /// private folder of its own, so the login in use stays as it is.
-    func beginAdd(_ provider: AgentProvider) {
+    /// Starts the provider's own sign-in for an account to add, or for the
+    /// saved login `renewing` whose tokens died: signing in to the same account
+    /// renews it. It runs in a private folder of its own, so the login in use
+    /// stays as it is.
+    func beginAdd(_ provider: AgentProvider, renewing: AgentAccount.ID? = nil) {
         guard running, adding?.isUnderWay != true else { return }
         addAttempt += 1
         let attempt = addAttempt
         adding = .starting(provider)
+        self.renewing = renewing
         queue.async { [self] in
             let flow = readerSession >= 0 ? makeLoginFlow(provider) : nil
             DispatchQueue.main.async { [self] in
@@ -303,6 +308,7 @@ final class AgentAccountService: ObservableObject {
         loginFlow?.cancel()
         loginFlow = nil
         adding = nil
+        renewing = nil
     }
 
     /// Runs on a thread of its own for as long as the person takes to sign in.
@@ -312,8 +318,13 @@ final class AgentAccountService: ObservableObject {
             DispatchQueue.main.async {
                 guard let self, attempt == self.addAttempt else { return }
                 switch step {
-                case .claude(let url): self.adding = .claude(url: url)
-                case .codex(let url, let code): self.adding = .codex(url: url, code: code)
+                case .claude(let url):
+                    // Claude Code opens its page itself.
+                    self.adding = .claude(url: url)
+                case .codex(let url, let code):
+                    self.adding = .codex(url: url, code: code)
+                    // Codex only prints its page; each step comes once, so it opens once.
+                    NSWorkspace.shared.open(url)
                 case .finishing: self.adding = .finishing(provider)
                 }
             }
@@ -331,7 +342,9 @@ final class AgentAccountService: ObservableObject {
             guard attempt == addAttempt else { return }
             loginFlow = nil
             switch outcome {
-            case .added, .cancelled: adding = nil
+            case .added, .cancelled:
+                adding = nil
+                renewing = nil
             case .failed(let message): adding = .failed(provider, message: message)
             }
         }

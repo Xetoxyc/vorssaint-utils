@@ -4,7 +4,8 @@
 import SwiftUI
 
 /// The AI Accounts page: each provider's saved logins with their limits.
-/// A tap on a login that is not in use makes it the one the tool signs in with.
+/// A tap on a login that is not in use makes it the one the tool signs in with;
+/// a tap on one that expired signs in to it again.
 struct NotchAccountsView: View {
     let size: CGSize
     @ObservedObject private var service = AgentAccountService.shared
@@ -101,9 +102,14 @@ struct NotchAccountsView: View {
                 case .saved, nil: EmptyView()
                 }
                 ForEach(service.accounts.filter { $0.account.provider == provider }) { state in
-                    NotchAccountRow(state: state, switching: service.switching, now: now, text: text,
+                    NotchAccountRow(state: state, switching: service.switching,
+                                    signingIn: service.adding?.isUnderWay == true, now: now, text: text,
                                     agents: FeatureStrings.notchAgents(l10n.language)) {
                         service.switchTo(state.id)
+                    } onSignIn: {
+                        // The code is pasted, or read, in the Settings panel.
+                        service.beginAdd(provider, renewing: state.id)
+                        NotchService.shared.openSettings(showing: .accounts)
                     }
                 }
                 if let error = error(for: provider, first: first) {
@@ -162,10 +168,13 @@ private struct NotchAccountRow: View {
     let state: AgentAccountState
     /// The login a swap is moving to; every row waits while one is under way.
     let switching: AgentAccount.ID?
+    /// A sign-in is under way; a login that needs one waits for it.
+    let signingIn: Bool
     let now: Date
     let text: NotchAccountStrings
     let agents: NotchAgentStrings
     let onSwitch: () -> Void
+    let onSignIn: () -> Void
     @Environment(\.locale) private var locale
 
     private var account: AgentAccount { state.account }
@@ -187,6 +196,11 @@ private struct NotchAccountRow: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(text.switchTo(account.displayName))
                 .help(text.switchTo(account.displayName))
+        } else if account.needsLogin && !signingIn {
+            Button(action: onSignIn) { content.contentShape(Rectangle()) }
+                .buttonStyle(.plain)
+                .accessibilityLabel(text.signInAgainTo(account.displayName))
+                .help(text.signInAgainTo(account.displayName))
         } else {
             content.accessibilityElement(children: .combine)
         }
