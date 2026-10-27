@@ -86,8 +86,13 @@ struct NotchAccountsSettingsControls: View {
                 .padding(.leading, settingsRowTextInset)
         }
         ForEach(service.accounts.filter { $0.account.provider == provider }) { state in
-            NotchAccountSettingsRow(state: state, text: text) { service.rename(state.id, label: $0) }
-                remove: { removing = state.account }
+            NotchAccountSettingsRow(state: state, text: text, signingIn: service.adding?.isUnderWay == true) {
+                service.rename(state.id, label: $0)
+            } signIn: {
+                service.beginAdd(provider, renewing: state.id)
+            } remove: {
+                removing = state.account
+            }
                 .padding(.leading, settingsRowTextInset)
         }
         SettingsRow(symbol: "arrow.left.arrow.right", title: text.autoSwap(provider.displayName), caption: text.autoSwapHint) {
@@ -122,6 +127,7 @@ private struct NotchAccountAddPanel: View {
             case .starting:
                 waiting(text.addStarting)
             case .claude(let url):
+                renewHint
                 hint(text.addClaudeHint)
                 HStack(spacing: 8) {
                     TextField(text.addCodePlaceholder, text: $code)
@@ -138,6 +144,7 @@ private struct NotchAccountAddPanel: View {
                     Button(cancel, role: .cancel) { service.cancelAdd() }
                 }
             case .codex(let url, let code):
+                renewHint
                 hint(text.addCodexHint)
                 Button(url.absoluteString) { NSWorkspace.shared.open(url) }
                     .buttonStyle(.link)
@@ -171,6 +178,13 @@ private struct NotchAccountAddPanel: View {
         service.submitCode(code)
     }
 
+    /// Which account to sign in to, when this sign-in renews a saved login.
+    @ViewBuilder private var renewHint: some View {
+        if let id = service.renewing, let state = service.accounts.first(where: { $0.id == id }) {
+            hint(text.renewHint(state.account.email))
+        }
+    }
+
     private func hint(_ message: String) -> some View {
         Text(message).font(.callout).fixedSize(horizontal: false, vertical: true)
     }
@@ -194,26 +208,32 @@ private struct NotchAccountAddPanel: View {
                 .textSelection(.enabled)
         }
         HStack(spacing: 8) {
-            Button(text.addTryAgain) { service.beginAdd(provider) }
+            Button(text.addTryAgain) { service.beginAdd(provider, renewing: service.renewing) }
             Button(text.addDismiss) { service.cancelAdd() }
         }
     }
 }
 
-/// One saved login: a label of the person's own, whose login it is, and the
-/// way to forget it.
+/// One saved login: a label of the person's own, whose login it is, the way
+/// to sign in to it again once it expired, and the way to forget it.
 private struct NotchAccountSettingsRow: View {
     let state: AgentAccountState
     let text: NotchAccountStrings
+    /// A sign-in is under way; signing in again waits for it.
+    let signingIn: Bool
     let rename: (String) -> Void
+    let signIn: () -> Void
     let remove: () -> Void
     @State private var label: String
     @FocusState private var editing: Bool
 
-    init(state: AgentAccountState, text: NotchAccountStrings, rename: @escaping (String) -> Void, remove: @escaping () -> Void) {
+    init(state: AgentAccountState, text: NotchAccountStrings, signingIn: Bool, rename: @escaping (String) -> Void,
+         signIn: @escaping () -> Void, remove: @escaping () -> Void) {
         self.state = state
         self.text = text
+        self.signingIn = signingIn
         self.rename = rename
+        self.signIn = signIn
         self.remove = remove
         _label = State(initialValue: state.account.label)
     }
@@ -233,8 +253,13 @@ private struct NotchAccountSettingsRow: View {
                     .truncationMode(.middle)
             }
             if state.isActive { badge(text.active, tint: .green) }
-            if state.account.needsLogin { badge(text.needsLogin, tint: .orange).help(text.needsLoginHint) }
             Spacer(minLength: 8)
+            if state.account.needsLogin {
+                Button(text.signInAgain, action: signIn)
+                    .tint(.orange)
+                    .disabled(signingIn)
+                    .help(text.signInAgainTo(state.account.displayName))
+            }
             Button(text.remove, role: .destructive, action: remove)
         }
         // Leaving the field saves the label, like pressing Return in it.

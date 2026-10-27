@@ -59,6 +59,9 @@ struct NotchAccountStrings {
     let addFailed: String
     let addTryAgain: String
     let addDismiss: String
+    let signInAgain: String
+    let signInAgainToFormat: String
+    let renewHintFormat: String
 
     func switchTo(_ login: String) -> String { String(format: switchToFormat, login) }
     func unsaved(_ email: String) -> String { String(format: unsavedFormat, email) }
@@ -71,6 +74,8 @@ struct NotchAccountStrings {
     var notSignedInNote: String { "\(notSignedIn)\(signInByTap)" }
     func removeConfirm(_ login: String) -> String { String(format: removeConfirmFormat, login) }
     func autoSwap(_ provider: String) -> String { String(format: autoSwapFormat, provider) }
+    func signInAgainTo(_ login: String) -> String { String(format: signInAgainToFormat, login) }
+    func renewHint(_ email: String) -> String { String(format: renewHintFormat, email) }
 
     /// What a provider's running sessions do after a swap: Claude Code reads
     /// its login again on its own, a Codex session keeps the one it started with.
@@ -139,7 +144,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Active",
         needsLogin: "Needs login",
-        needsLoginHint: "This login has expired. Sign in to it again with “Add login” in Settings.",
+        needsLoginHint: "This login has expired. Tap it to sign in again.",
         noUsage: "No usage yet",
         switchToFormat: "Switch to %@",
         unsavedFormat: "%@ is signed in and not saved",
@@ -184,7 +189,10 @@ extension NotchAccountStrings {
         addFinishing: "Saving the login…",
         addFailed: "The sign-in did not finish. Nothing was changed.",
         addTryAgain: "Try again",
-        addDismiss: "Dismiss"
+        addDismiss: "Dismiss",
+        signInAgain: "Sign in again",
+        signInAgainToFormat: "Sign in again to %@",
+        renewHintFormat: "Sign in to %@ again. Signing in to another account saves it as a new login."
     )
 
     static let uk = NotchAccountStrings(
@@ -197,7 +205,7 @@ extension NotchAccountStrings {
         auto: "авто",
         active: "Активний",
         needsLogin: "Потрібен вхід",
-        needsLoginHint: "Термін дії цього входу минув. Увійдіть знову через «Додати вхід» у Налаштуваннях.",
+        needsLoginHint: "Термін дії цього входу минув. Торкніться його, щоб увійти знову.",
         noUsage: "Даних про використання ще немає",
         switchToFormat: "Перемкнути на %@",
         unsavedFormat: "%@: вхід виконано, але не збережено",
@@ -242,7 +250,10 @@ extension NotchAccountStrings {
         addFinishing: "Збереження входу…",
         addFailed: "Вхід не завершено. Нічого не змінено.",
         addTryAgain: "Спробувати ще раз",
-        addDismiss: "Закрити"
+        addDismiss: "Закрити",
+        signInAgain: "Увійти знову",
+        signInAgainToFormat: "Увійти знову як %@",
+        renewHintFormat: "Увійдіть знову як %@. Вхід в інший обліковий запис збережеться як новий вхід."
     )
 
     static let ptBR = NotchAccountStrings(
@@ -255,7 +266,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Ativo",
         needsLogin: "Precisa de login",
-        needsLoginHint: "Este login expirou. Entre nele de novo com “Adicionar login” nos Ajustes.",
+        needsLoginHint: "Este login expirou. Toque nele para entrar de novo.",
         noUsage: "Ainda sem uso",
         switchToFormat: "Trocar para %@",
         unsavedFormat: "%@ está conectado e não foi salvo",
@@ -300,7 +311,10 @@ extension NotchAccountStrings {
         addFinishing: "Salvando o login…",
         addFailed: "O login não foi concluído. Nada foi alterado.",
         addTryAgain: "Tentar de novo",
-        addDismiss: "Fechar"
+        addDismiss: "Fechar",
+        signInAgain: "Entrar de novo",
+        signInAgainToFormat: "Entrar de novo como %@",
+        renewHintFormat: "Entre de novo como %@. Entrar em outra conta a salva como um novo login."
     )
 
     static let es = NotchAccountStrings(
@@ -313,7 +327,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Activo",
         needsLogin: "Requiere iniciar sesión",
-        needsLoginHint: "Este inicio de sesión ha caducado. Vuelve a iniciarlo con “Añadir inicio de sesión” en Ajustes.",
+        needsLoginHint: "Este inicio de sesión ha caducado. Tócalo para volver a iniciar sesión.",
         noUsage: "Aún sin uso",
         switchToFormat: "Cambiar a %@",
         unsavedFormat: "%@ tiene la sesión iniciada y no está guardado",
@@ -358,7 +372,10 @@ extension NotchAccountStrings {
         addFinishing: "Guardando el inicio de sesión…",
         addFailed: "El inicio de sesión no se completó. No se ha cambiado nada.",
         addTryAgain: "Reintentar",
-        addDismiss: "Cerrar"
+        addDismiss: "Cerrar",
+        signInAgain: "Volver a iniciar sesión",
+        signInAgainToFormat: "Volver a iniciar sesión como %@",
+        renewHintFormat: "Vuelve a iniciar sesión como %@. Si inicias sesión con otra cuenta, se guardará como un nuevo inicio de sesión."
     )
 
     static let sk = NotchAccountStrings(
@@ -371,7 +388,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Aktívne",
         needsLogin: "Vyžaduje prihlásenie",
-        needsLoginHint: "Platnosť tohto prihlásenia vypršala. Prihláste sa znova cez „Pridať prihlásenie“ v Nastaveniach.",
+        needsLoginHint: "Platnosť tohto prihlásenia vypršala. Ťuknite naň a prihláste sa znova.",
         noUsage: "Zatiaľ žiadne využitie",
         switchToFormat: "Prepnúť na %@",
         unsavedFormat: "%@ je prihlásený a nie je uložený",
@@ -416,7 +433,10 @@ extension NotchAccountStrings {
         addFinishing: "Prihlásenie sa ukladá…",
         addFailed: "Prihlásenie sa nedokončilo. Nič sa nezmenilo.",
         addTryAgain: "Skúsiť znova",
-        addDismiss: "Zavrieť"
+        addDismiss: "Zavrieť",
+        signInAgain: "Prihlásiť sa znova",
+        signInAgainToFormat: "Prihlásiť sa znova ako %@",
+        renewHintFormat: "Prihláste sa znova ako %@. Prihlásenie do iného účtu sa uloží ako nové prihlásenie."
     )
 
     static let de = NotchAccountStrings(
@@ -429,7 +449,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Aktiv",
         needsLogin: "Anmeldung nötig",
-        needsLoginHint: "Diese Anmeldung ist abgelaufen. Melde dich über „Anmeldung hinzufügen“ in den Einstellungen erneut an.",
+        needsLoginHint: "Diese Anmeldung ist abgelaufen. Tippe darauf, um dich erneut anzumelden.",
         noUsage: "Noch keine Nutzung",
         switchToFormat: "Zu %@ wechseln",
         unsavedFormat: "%@ ist angemeldet und nicht gesichert",
@@ -474,7 +494,10 @@ extension NotchAccountStrings {
         addFinishing: "Anmeldung wird gesichert…",
         addFailed: "Die Anmeldung wurde nicht abgeschlossen. Es wurde nichts geändert.",
         addTryAgain: "Erneut versuchen",
-        addDismiss: "Schließen"
+        addDismiss: "Schließen",
+        signInAgain: "Erneut anmelden",
+        signInAgainToFormat: "Erneut als %@ anmelden",
+        renewHintFormat: "Melde dich erneut als %@ an. Eine Anmeldung bei einem anderen Account wird als neue Anmeldung gespeichert."
     )
 
     static let fr = NotchAccountStrings(
@@ -487,7 +510,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Active",
         needsLogin: "Connexion requise",
-        needsLoginHint: "Cette connexion a expiré. Reconnectez-vous avec « Ajouter une connexion » dans les Réglages.",
+        needsLoginHint: "Cette connexion a expiré. Touchez-la pour vous reconnecter.",
         noUsage: "Aucune utilisation pour l’instant",
         switchToFormat: "Passer à %@",
         unsavedFormat: "%@ est connecté et n’est pas enregistré",
@@ -532,7 +555,10 @@ extension NotchAccountStrings {
         addFinishing: "Enregistrement de la connexion…",
         addFailed: "La connexion n’a pas abouti. Rien n’a été modifié.",
         addTryAgain: "Réessayer",
-        addDismiss: "Fermer"
+        addDismiss: "Fermer",
+        signInAgain: "Se reconnecter",
+        signInAgainToFormat: "Se reconnecter en tant que %@",
+        renewHintFormat: "Reconnectez-vous en tant que %@. Une connexion à un autre compte est enregistrée comme nouvelle connexion."
     )
 
     static let it = NotchAccountStrings(
@@ -545,7 +571,7 @@ extension NotchAccountStrings {
         auto: "auto",
         active: "Attivo",
         needsLogin: "Accesso richiesto",
-        needsLoginHint: "Questo accesso è scaduto. Accedi di nuovo con “Aggiungi accesso” nelle Impostazioni.",
+        needsLoginHint: "Questo accesso è scaduto. Toccalo per accedere di nuovo.",
         noUsage: "Ancora nessun utilizzo",
         switchToFormat: "Passa a %@",
         unsavedFormat: "%@ ha effettuato l’accesso e non è salvato",
@@ -590,7 +616,10 @@ extension NotchAccountStrings {
         addFinishing: "Salvataggio dell’accesso…",
         addFailed: "L’accesso non è stato completato. Non è stato modificato nulla.",
         addTryAgain: "Riprova",
-        addDismiss: "Chiudi"
+        addDismiss: "Chiudi",
+        signInAgain: "Accedi di nuovo",
+        signInAgainToFormat: "Accedi di nuovo come %@",
+        renewHintFormat: "Accedi di nuovo come %@. Un accesso a un altro account viene salvato come nuovo accesso."
     )
 
     static let ru = NotchAccountStrings(
@@ -603,7 +632,7 @@ extension NotchAccountStrings {
         auto: "авто",
         active: "Активен",
         needsLogin: "Нужен вход",
-        needsLoginHint: "Срок действия этого входа истёк. Войдите снова через «Добавить вход» в Настройках.",
+        needsLoginHint: "Срок действия этого входа истёк. Нажмите на него, чтобы войти снова.",
         noUsage: "Данных об использовании пока нет",
         switchToFormat: "Переключить на %@",
         unsavedFormat: "%@: вход выполнен, но не сохранён",
@@ -648,7 +677,10 @@ extension NotchAccountStrings {
         addFinishing: "Сохранение входа…",
         addFailed: "Вход не завершён. Ничего не изменено.",
         addTryAgain: "Повторить",
-        addDismiss: "Закрыть"
+        addDismiss: "Закрыть",
+        signInAgain: "Войти снова",
+        signInAgainToFormat: "Войти снова как %@",
+        renewHintFormat: "Войдите снова как %@. Вход в другую учётную запись сохранится как новый вход."
     )
 
     static let tr = NotchAccountStrings(
@@ -661,7 +693,7 @@ extension NotchAccountStrings {
         auto: "oto",
         active: "Etkin",
         needsLogin: "Giriş gerekli",
-        needsLoginHint: "Bu oturumun süresi doldu. Ayarlar’daki “Oturum ekle” ile yeniden giriş yapın.",
+        needsLoginHint: "Bu oturumun süresi doldu. Yeniden giriş yapmak için ona dokunun.",
         noUsage: "Henüz kullanım yok",
         switchToFormat: "%@ hesabına geç",
         unsavedFormat: "%@ giriş yapmış ve kaydedilmemiş",
@@ -706,7 +738,10 @@ extension NotchAccountStrings {
         addFinishing: "Oturum kaydediliyor…",
         addFailed: "Giriş tamamlanmadı. Hiçbir şey değiştirilmedi.",
         addTryAgain: "Yeniden dene",
-        addDismiss: "Kapat"
+        addDismiss: "Kapat",
+        signInAgain: "Yeniden giriş yap",
+        signInAgainToFormat: "%@ olarak yeniden giriş yap",
+        renewHintFormat: "%@ olarak yeniden giriş yapın. Başka bir hesaba giriş yaparsanız yeni bir oturum olarak kaydedilir."
     )
 
     static let ja = NotchAccountStrings(
@@ -719,7 +754,7 @@ extension NotchAccountStrings {
         auto: "自動",
         active: "使用中",
         needsLogin: "ログインが必要",
-        needsLoginHint: "このログインは期限切れです。設定の「ログインを追加」でもう一度ログインしてください。",
+        needsLoginHint: "このログインは期限切れです。タップするともう一度ログインします。",
         noUsage: "使用量はまだありません",
         switchToFormat: "%@に切り替える",
         unsavedFormat: "%@はログイン中ですが保存されていません",
@@ -764,7 +799,10 @@ extension NotchAccountStrings {
         addFinishing: "ログインを保存しています…",
         addFailed: "サインインは完了しませんでした。何も変更されていません。",
         addTryAgain: "やり直す",
-        addDismiss: "閉じる"
+        addDismiss: "閉じる",
+        signInAgain: "もう一度ログイン",
+        signInAgainToFormat: "%@でもう一度ログイン",
+        renewHintFormat: "%@でもう一度ログインしてください。別のアカウントでログインすると、新しいログインとして保存されます。"
     )
 
     static let ko = NotchAccountStrings(
@@ -777,7 +815,7 @@ extension NotchAccountStrings {
         auto: "자동",
         active: "사용 중",
         needsLogin: "로그인 필요",
-        needsLoginHint: "이 로그인은 만료되었습니다. 설정의 ‘로그인 추가’로 다시 로그인하세요.",
+        needsLoginHint: "이 로그인은 만료되었습니다. 탭하여 다시 로그인하세요.",
         noUsage: "아직 사용량 없음",
         switchToFormat: "%@(으)로 전환",
         unsavedFormat: "%@이(가) 로그인되어 있지만 저장되지 않았습니다",
@@ -822,7 +860,10 @@ extension NotchAccountStrings {
         addFinishing: "로그인을 저장하는 중…",
         addFailed: "로그인이 완료되지 않았습니다. 변경된 내용은 없습니다.",
         addTryAgain: "다시 시도",
-        addDismiss: "닫기"
+        addDismiss: "닫기",
+        signInAgain: "다시 로그인",
+        signInAgainToFormat: "%@(으)로 다시 로그인",
+        renewHintFormat: "%@(으)로 다시 로그인하세요. 다른 계정으로 로그인하면 새 로그인으로 저장됩니다."
     )
 
     static let zhHans = NotchAccountStrings(
@@ -835,7 +876,7 @@ extension NotchAccountStrings {
         auto: "自动",
         active: "使用中",
         needsLogin: "需要登录",
-        needsLoginHint: "此登录已过期。请在设置中通过“添加登录”重新登录。",
+        needsLoginHint: "此登录已过期。轻点它即可重新登录。",
         noUsage: "暂无用量",
         switchToFormat: "切换到 %@",
         unsavedFormat: "%@ 已登录但未保存",
@@ -880,7 +921,10 @@ extension NotchAccountStrings {
         addFinishing: "正在保存登录…",
         addFailed: "登录未完成。未做任何更改。",
         addTryAgain: "重试",
-        addDismiss: "关闭"
+        addDismiss: "关闭",
+        signInAgain: "重新登录",
+        signInAgainToFormat: "以 %@ 重新登录",
+        renewHintFormat: "请以 %@ 重新登录。登录其他账户会将其保存为新的登录。"
     )
 
     static let zhTW = NotchAccountStrings(
@@ -893,7 +937,7 @@ extension NotchAccountStrings {
         auto: "自動",
         active: "使用中",
         needsLogin: "需要登入",
-        needsLoginHint: "此登入已過期。請在設定中透過「加入登入」重新登入。",
+        needsLoginHint: "此登入已過期。點一下即可重新登入。",
         noUsage: "尚無用量",
         switchToFormat: "切換到 %@",
         unsavedFormat: "%@ 已登入但尚未儲存",
@@ -938,7 +982,10 @@ extension NotchAccountStrings {
         addFinishing: "正在儲存登入…",
         addFailed: "登入未完成。未做任何更動。",
         addTryAgain: "重試",
-        addDismiss: "關閉"
+        addDismiss: "關閉",
+        signInAgain: "重新登入",
+        signInAgainToFormat: "以 %@ 重新登入",
+        renewHintFormat: "請以 %@ 重新登入。登入其他帳號會將其儲存為新的登入。"
     )
 
     static let zhHK = NotchAccountStrings(
@@ -951,7 +998,7 @@ extension NotchAccountStrings {
         auto: "自動",
         active: "使用中",
         needsLogin: "需要登入",
-        needsLoginHint: "此登入已過期。請在設定中透過「加入登入」重新登入。",
+        needsLoginHint: "此登入已過期。點一下即可重新登入。",
         noUsage: "尚無用量",
         switchToFormat: "切換至 %@",
         unsavedFormat: "%@ 已登入但尚未儲存",
@@ -996,6 +1043,9 @@ extension NotchAccountStrings {
         addFinishing: "正在儲存登入…",
         addFailed: "登入未完成。未作任何更改。",
         addTryAgain: "重試",
-        addDismiss: "關閉"
+        addDismiss: "關閉",
+        signInAgain: "重新登入",
+        signInAgainToFormat: "以 %@ 重新登入",
+        renewHintFormat: "請以 %@ 重新登入。登入其他帳戶會將其儲存為新的登入。"
     )
 }
