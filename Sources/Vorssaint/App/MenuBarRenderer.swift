@@ -589,6 +589,7 @@ enum MenuBarRenderer {
                                                 pressure: nil)])
                 }
             case .fanSpeed:
+                if MenuBarMetricAppearance.current == .bars { break }
                 if let value = FanControlPolicy.menuBarValue(for: snapshot.fanSpeeds) {
                     let minimumValue = Array(repeating: "20000", count: snapshot.fanSpeeds.count)
                         .joined(separator: "/")
@@ -678,6 +679,7 @@ enum MenuBarRenderer {
         case (_, .connectedDevices):
             return 6       // symbol + " 99"
         case (_, .fanSpeed):
+            if MenuBarMetricAppearance.current == .bars { return 4 }
             let count = max(1, SystemMonitor.fanTelemetryCount)
             return FanControlPolicy.menuBarWidthUnits(fanCount: count)
         }
@@ -1160,6 +1162,14 @@ enum MenuBarRenderer {
         }
     }
 
+    static func fanLiveIconPercent(for snapshot: SystemSnapshot) -> Int? {
+        guard !snapshot.fanSpeeds.isEmpty,
+              snapshot.fanSpeeds.allSatisfy(FanControlPolicy.validReading) else { return nil }
+        return FanControlPolicy.menuBarAveragePercent(speeds: snapshot.fanSpeeds,
+                                                      maxima: snapshot.fanMaxSpeeds)
+            ?? 0
+    }
+
     private static func estimatedSnapshot(fanCount: Int) -> SystemSnapshot {
         var snapshot = SystemSnapshot()
         snapshot.cpuUsage = 1
@@ -1172,6 +1182,7 @@ enum MenuBarRenderer {
         snapshot.gpuTemperature = 125
         snapshot.batteryTemperature = 125
         snapshot.fanSpeeds = Array(repeating: 20_000, count: fanCount)
+        snapshot.fanMaxSpeeds = Array(repeating: 20_000, count: fanCount)
         snapshot.netDownBytesPerSec = 1_000_000_000
         snapshot.netUpBytesPerSec = 1_000_000_000
         snapshot.disk = DiskReading(devices: [
