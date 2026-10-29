@@ -838,6 +838,66 @@ enum RepositoryFeatureTests {
                "sudo terminal error triggers Homebrew terminal fallback")
         suite.expect(HomebrewCommandBuilder.installerCommand == #"/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""#,
                "Homebrew installer command matches the official install script entrypoint")
+        // The terminal handoff: a script the person's own terminal runs once in
+        // their own shell, leaving nothing behind (issue #598).
+        do {
+            let folder = FileManager.default.temporaryDirectory
+                .appendingPathComponent("vorssaint-terminal-script-\(UUID().uuidString)")
+            try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            defer { try? FileManager.default.removeItem(at: folder) }
+            // A stand-in login shell that writes down the arguments it was given.
+            let shell = folder.appendingPathComponent("shell")
+            let received = folder.appendingPathComponent("received")
+            try? "#!/bin/sh\nprintf '%s\\n' \"$@\" > \(HomebrewCommandBuilder.shellQuote(received.path))\n"
+                .write(to: shell, atomically: true, encoding: .utf8)
+            try? FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: shell.path)
+            let command = #"eval (/opt/homebrew/bin/brew shellenv fish); echo "it's $HOME" 'a\b'"#
+            let script = try? HomebrewTerminalScript.write(command: command, shellPath: shell.path, directory: folder)
+            let permissions = script
+                .flatMap { try? FileManager.default.attributesOfItem(atPath: $0.path)[.posixPermissions] as? NSNumber }
+            suite.expect(script?.pathExtension == "" && permissions?.intValue == 0o700,
+                   "the terminal script has no extension, so macOS opens it in the terminal the person chose, "
+                   + "and only they can read or run it")
+            if let script {
+                let process = Process()
+                process.executableURL = script
+                try? process.run()
+                process.waitUntilExit()
+            }
+            let arguments = (try? String(contentsOf: received, encoding: .utf8))?
+                .split(separator: "\n", omittingEmptySubsequences: false).map(String.init) ?? []
+            suite.expect(arguments == ["-l", "-i", "-c", command, ""],
+                   "the terminal script hands the command, unchanged, to the person's own shell as a login "
+                   + "and interactive shell, the way Terminal ran it before, found \(arguments)")
+            suite.expect(script.map { !FileManager.default.fileExists(atPath: $0.path) } ?? false,
+                   "the terminal script deletes itself as it runs")
+            do {
+                for shellPath in ["/bin/csh", "/bin/tcsh"] {
+                    let output = folder.appendingPathComponent(URL(fileURLWithPath: shellPath).lastPathComponent)
+                    let command = "/usr/bin/printf '%s' 'terminal handoff' > "
+                        + HomebrewCommandBuilder.shellQuote(output.path)
+                    let script = try HomebrewTerminalScript.write(command: command,
+                                                                   shellPath: shellPath, directory: folder)
+                    let process = Process()
+                    process.executableURL = script
+                    let input = Pipe()
+                    process.standardInput = input
+                    try process.run()
+                    try input.fileHandleForWriting.close()
+                    process.waitUntilExit()
+                    suite.expect(process.terminationStatus == 0
+                                 && (try? String(contentsOf: output, encoding: .utf8)) == "terminal handoff",
+                                 "the production terminal script runs commands in \(shellPath)")
+                    suite.expect(!FileManager.default.fileExists(atPath: script.path),
+                                 "the \(shellPath) terminal script removes itself")
+                }
+            } catch {
+                suite.expect(false, "could not run the csh terminal handoff: \(error)")
+            }
+            suite.expect((try? HomebrewTerminalScript.write(command: command, shellPath: shell.path,
+                                                            directory: folder.appendingPathComponent("missing"))) == nil,
+                   "a terminal script that cannot be written reports an error instead of opening nothing")
+        }
         expectEqual(HomebrewCommandBuilder.shellProfilePath(homeDirectory: "/Users/test", shellPath: "/bin/zsh"),
                     "/Users/test/.zprofile",
                     "Homebrew shell setup uses zprofile for zsh")
@@ -1404,6 +1464,25 @@ enum RepositoryFeatureTests {
         suite.expect(!appSources.isEmpty && applicationRoleReads.isEmpty,
                "no application element is ever asked for its role: \(applicationRoleReads)")
 
+        // The snippet probe asks whatever app is in front while typing waits,
+        // so its questions share one deadline, and a spent one stops them: a
+        // zero timeout means the system default, which is seconds.
+        let readerLines = repository.lines(at: appPrefix + "Services/SelectedTextReader.swift")
+            .filter { !isCommentLine($0) }
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+        let focusedTextProbe = readerLines
+            .drop(while: { !$0.hasPrefix("func text(in range: NSRange)") })
+            .prefix(while: { !$0.hasPrefix("private static func limit(") })
+        suite.expect(readerLines.contains("guard left > 0 else { return false }")
+               && focusedTextProbe.filter { $0.contains("limit(") }.count == 5
+               && focusedTextProbe.filter { $0.contains("copyElement(") || $0.contains("copyValue(")
+                   || $0.contains("copyString(") }.count == 5
+               && focusedTextProbe.contains("guard textLength <= wholeValueLimit,")
+               && !focusedTextProbe.contains(where: {
+                   $0.contains("kAXRoleAttribute") || $0.contains("AXUIElementSetMessagingTimeout")
+               }),
+               "the focused text probe asks every question within one deadline, never a role, and copies only a short value whole")
+
         // A walk up kAXParent reaches an application element without naming it,
         // so every such walk must stop before asking that parent for its role.
         var unguardedParentWalks: [String] = []
@@ -1920,15 +1999,21 @@ enum RepositoryFeatureTests {
 
         // MARK: Secure input
 
+        // The session records the app that was active when secure input
+        // turned on, not the process holding it, and Settings makes
+        // Vorssaint that app.
+        let secureInputOwnPid: pid_t = 77
         suite.expect(SecureInputSupport.holder(isEnabled: false,
                                          read: .noHolder,
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { _ in nil },
                                          isProcessAlive: { _ in true }) == .off,
-               "secure input off with no recorded holder is off")
+               "secure input off with no recorded app is off")
         var secureInputNameLookups = 0
         let secureInputOffWithPid = SecureInputSupport.holder(
             isEnabled: false,
             read: .holder(4242),
+            ownPid: secureInputOwnPid,
             runningApp: { pid in
                 secureInputNameLookups += 1
                 return ("SomeBrowser", pid)
@@ -1938,6 +2023,7 @@ enum RepositoryFeatureTests {
                "secure input off stays off even with a pid still recorded")
         suite.expect(SecureInputSupport.holder(isEnabled: false,
                                          read: .unavailable,
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { _ in nil },
                                          isProcessAlive: { _ in true }) == .off,
                "secure input off stays off when the session cannot be read")
@@ -1946,6 +2032,7 @@ enum RepositoryFeatureTests {
 
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .holder(999),
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { pid in
                                              pid == 999 ? ("SomeBrowser", 4242) : nil
                                          },
@@ -1954,35 +2041,82 @@ enum RepositoryFeatureTests {
                "a helper pid is attributed to the app responsible for it")
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .holder(4242),
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { _ in nil },
                                          isProcessAlive: { _ in true }) == .unknown,
-               "a running holder that is no regular app is never sent to log out")
+               "a running process that is no regular app is never sent to log out")
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .holder(4242),
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { _ in nil },
                                          isProcessAlive: { _ in false }) == .unattributed,
-               "a holder that has exited is what a new login session clears")
+               "once the recorded app has quit, a new login session is the fallback")
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .noHolder,
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { _ in nil },
                                          isProcessAlive: { _ in true }) == .unattributed,
-               "secure input on with no recorded holder is unattributed")
+               "secure input on with no recorded app is unattributed")
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .holder(0),
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { pid in ("SomeBrowser", pid) },
                                          isProcessAlive: { _ in true }) == .unattributed,
                "a zero pid is not an attribution")
         suite.expect(SecureInputSupport.holder(isEnabled: true,
                                          read: .holder(4242),
+                                         ownPid: secureInputOwnPid,
                                          runningApp: { pid in ("", pid) },
                                          isProcessAlive: { _ in false }) == .unattributed,
                "an empty app name is not an attribution")
+
+        var secureInputOwnLivenessChecks = 0
+        suite.expect(SecureInputSupport.holder(isEnabled: true,
+                                         read: .holder(secureInputOwnPid),
+                                         ownPid: secureInputOwnPid,
+                                         runningApp: { pid in ("Vorssaint", pid) },
+                                         isProcessAlive: { _ in
+                                             secureInputOwnLivenessChecks += 1
+                                             return true
+                                         }) == .unknown,
+               "Vorssaint recorded as the active app is never named as holding secure input")
+        suite.expect(secureInputOwnLivenessChecks == 0,
+               "naming Vorssaint is refused before any liveness check")
+        suite.expect(SecureInputSupport.holder(isEnabled: true,
+                                         read: .holder(5555),
+                                         ownPid: secureInputOwnPid,
+                                         runningApp: { _ in ("Vorssaint", secureInputOwnPid) },
+                                         isProcessAlive: { _ in true }) == .unknown,
+               "a recorded helper owned by Vorssaint is not named either")
+        suite.expect(SecureInputSupport.holder(isEnabled: true,
+                                         read: .holder(secureInputOwnPid),
+                                         ownPid: secureInputOwnPid,
+                                         runningApp: { _ in nil },
+                                         isProcessAlive: { _ in true }) == .unknown,
+               "Vorssaint recorded while it is not a regular app is never sent to log out")
+        suite.expect(SecureInputSupport.holder(isEnabled: true,
+                                         read: .holder(4242),
+                                         ownPid: secureInputOwnPid,
+                                         runningApp: { pid in ("Vorssaint", pid) },
+                                         isProcessAlive: { _ in true })
+                   == .app(name: "Vorssaint", pid: 4242),
+               "another copy of the app is told apart from this one by pid, not by name")
+        // The rule above protects the row only if the monitor passes this
+        // process, and the harness does not compile `SecureInputMonitor`.
+        let secureInputMonitorCode = ((try? String(
+            contentsOfFile: "Sources/Vorssaint/Core/SecureInputMonitor.swift", encoding: .utf8)) ?? "")
+            .components(separatedBy: "\n")
+            .filter { !$0.trimmingCharacters(in: .whitespaces).hasPrefix("//") }
+            .joined(separator: "\n")
+        suite.expect(secureInputMonitorCode.contains("ownPid: getpid(),"),
+               "the secure input monitor passes its own pid, so the row never names Vorssaint")
 
         var secureInputUnavailableLookups = 0
         var secureInputUnavailableLivenessChecks = 0
         let secureInputUnavailable = SecureInputSupport.holder(
             isEnabled: true,
             read: .unavailable,
+            ownPid: secureInputOwnPid,
             runningApp: { pid in
                 secureInputUnavailableLookups += 1
                 return ("SomeBrowser", pid)
