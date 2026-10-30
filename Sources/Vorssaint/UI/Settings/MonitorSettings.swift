@@ -267,9 +267,15 @@ private struct MenuBarStyleChoice: View {
     let title: String
     let selected: Bool
     let action: () -> Void
+    @State private var fanInteractionTrigger = 0
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            action()
+            if appearance == .bars {
+                fanInteractionTrigger += 1
+            }
+        } label: {
             VStack(spacing: 8) {
                 mockup
                     .frame(maxWidth: .infinity)
@@ -303,11 +309,19 @@ private struct MenuBarStyleChoice: View {
             HStack(spacing: 10) {
                 block(label: "CPU", value: "42%")
                 block(label: "RAM", value: "61%")
+                block(label: "RPM", value: "3200")
             }
         case .bars:
             HStack(spacing: 10) {
                 bar(label: "CPU", fraction: 0.42)
                 bar(label: "RAM", fraction: 0.61)
+                LiveFanRepresentable(interactive: false,
+                                     interactionTrigger: fanInteractionTrigger,
+                                     holdLowSeconds: 10,
+                                     tint: .white)
+                    .frame(width: 16, height: 16)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
             }
         }
     }
